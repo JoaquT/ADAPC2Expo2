@@ -1,0 +1,39 @@
+PROCEDIMIENTO GraphColoring(G, m)
+    n ← número de nodos en G
+    colores[1..n] ← {0,0,...,0}
+
+    SI Colorear(1, G, m, colores) = VERDADERO ENTONCES
+        IMPRIMIR colores
+    SINO
+        IMPRIMIR "No es posible colorear"
+    FIN SI
+FIN PROCEDIMIENTO
+
+
+FUNCIÓN Colorear(v, G, m, colores) : booleano
+    SI v > n ENTONCES
+        RETORNAR VERDADERO
+    FIN SI
+
+    PARA c ← 1 HASTA m HACER
+        SI EsSeguro(v, G, colores, c) ENTONCES
+            colores[v] ← c
+            SI Colorear(v+1, G, m, colores) = VERDADERO ENTONCES
+                RETORNAR VERDADERO
+            FIN SI
+            colores[v] ← 0
+        FIN SI
+    FIN PARA
+
+    RETORNAR FALSO
+FIN FUNCIÓN
+
+
+FUNCIÓN EsSeguro(v, G, colores, c) : booleano
+    PARA cada vecino u de v EN G HACER
+        SI colores[u] = c ENTONCES
+            RETORNAR FALSO
+        FIN SI
+    FIN PARA
+    RETORNAR VERDADERO
+FIN FUNCIÓN

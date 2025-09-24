@@ -1,0 +1,25 @@
+ALGORITMO BruteForceJobScheduling(J)
+    max_ganancia ← 0
+    mejor_asignacion ← ∅
+    
+    PARA cada permutación P de J HACER
+        tiempo ← 0
+        ganancia ← 0
+        asignacion ← ∅
+        
+        PARA cada trabajo j en P HACER
+            SI tiempo < j.deadline ENTONCES
+                asignacion ← asignacion ∪ {j}
+                ganancia ← ganancia + j.profit
+                tiempo ← tiempo + 1
+            FIN SI
+        FIN PARA
+        
+        SI ganancia > max_ganancia ENTONCES
+            max_ganancia ← ganancia
+            mejor_asignacion ← asignacion
+        FIN SI
+    FIN PARA
+    
+    RETORNAR mejor_asignacion, max_ganancia
+FIN ALGORITMO
