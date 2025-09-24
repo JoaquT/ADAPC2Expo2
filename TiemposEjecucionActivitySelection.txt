@@ -1,0 +1,14 @@
+
+Tiempo de ejecución:
+
+Algoritmo ActivitySelection
+mejor solucion por Greedy :
+-  4 actividades, tiempo de ejecucion: 0.000016 segundos
+-  5 actividades, tiempo de ejecucion: 0.000012 segundos
+-  6 actividades, tiempo de ejecucion: 0.000008 segundos
+-  6 actividades, tiempo de ejecucion: 0.000009 segundos
+mejor solución por BruteForce:
+-  4 actividades, tiempo de ejecuci n: 0.000065 segundos
+-  5 actividades, tiempo de ejecuci n: 0.001175 segundos
+-  10 actividades, tiempo de ejecuci n: 0.156779 segundos
+-  12 actividades, tiempo de ejecuci n: 76.587371 segundos
