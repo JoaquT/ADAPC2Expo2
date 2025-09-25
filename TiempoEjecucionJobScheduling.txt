@@ -1,0 +1,21 @@
+Brute Force Job Scheduling
+Mejor orden: [('a', 2, 100), ('c', 2, 27), ('e', 3, 15)]
+Ganancia máxima: 142
+Tiempo de ejecución: 0.000051 segundos
+
+Greedy Job Scheduling
+Orden elegido: [('a', 2, 100), ('c', 2, 27), ('e', 3, 15)]
+Ganancia obtenida: 142
+Tiempo de ejecución: 0.000017 segundos
+
+
+---------------------------------------
+Brute Force Job Scheduling
+Mejor orden: [('a', 2, 100), ('g', 2, 60), ('f', 3, 30)]
+Ganancia máxima: 190
+Tiempo de ejecución: 0.001998 segundos
+
+Greedy Job Scheduling
+Orden elegido: [('a', 2, 100), ('g', 2, 60), ('f', 3, 30)]
+Ganancia obtenida: 190
+Tiempo de ejecución: 0.000020 segundos

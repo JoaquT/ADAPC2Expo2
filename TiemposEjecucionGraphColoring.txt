@@ -1,0 +1,37 @@
+
+Tiempo de ejecución Coloring
+
+Graph 1
+                                                          
+Greedy                                                            
+                                                           
+Vertex 0  --->  Color 1
+Vertex 1  --->  Color 2
+Vertex 2  --->  Color 3
+Vertex 3  --->  Color 1
+Vertex 4  --->  Color 2
+Tiempo de ejecución: 0.000007 segundos
+
+
+Brute Force Coloring
+Coloreo válido con 3 colores: (1, 2, 3, 1, 2)
+Tiempo de ejecución: 0.000022 segundos
+
+------------------------------------------------
+
+Graph 2
+
+Greedy 
+
+Vertex 0  --->  Color 0
+Vertex 1  --->  Color 1
+Vertex 2  --->  Color 2
+Vertex 3  --->  Color 0
+Vertex 4  --->  Color 3 
+Tiempo de ejecución: 0.000006 segundos
+
+
+
+Brute Force Coloring
+Coloreo válido con 3 colores: (1, 2, 3, 2, 1)
+Tiempo de ejecución: 0.000025 segundos

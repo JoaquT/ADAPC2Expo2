@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.26)  25 SEP 2025 09:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.26)  25 SEP 2025 09:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1327,20 +1327,20 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
  ***********
 Package rerunfilecheck Info: File `Exposicion.out' has not changed.
-(rerunfilecheck)             Checksum: E5AB093D287906A86EE96018785663AA;2735.
+(rerunfilecheck)             Checksum: 4F93C748F66C161B2EB542AE6D571731;3719.
  ) 
 Here is how much of TeX's memory you used:
- 39570 strings out of 469923
- 878524 string characters out of 5469170
- 1253315 words of memory out of 5000000
- 65545 multiletter control sequences out of 15000+600000
+ 39578 strings out of 469923
+ 878620 string characters out of 5469170
+ 1253446 words of memory out of 5000000
+ 65553 multiletter control sequences out of 15000+600000
  707237 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,1659b,947s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss17.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Exposicion.pdf (43 pages, 683186 bytes).
+Output written on Exposicion.pdf (43 pages, 685829 bytes).
 PDF statistics:
- 2023 PDF objects out of 2073 (max. 8388607)
+ 2039 PDF objects out of 2073 (max. 8388607)
  124 named destinations out of 1000 (max. 500000)
- 1991 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2023 words of extra memory for PDF output out of 10000 (max. 10000000)
 

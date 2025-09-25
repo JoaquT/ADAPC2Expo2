@@ -1,0 +1,38 @@
+Ejemplo 1
+
+Huffman Brute Force  
+Símbolos: ['A', 'B', 'C']
+Frecuencias: [5, 2, 1]
+Mejor costo: 11
+Asignación (símbolo -> longitud): {'A': 1, 'B': 2, 'C': 2}
+Tiempo de ejecución: 0.000039 segundos
+
+Huffman Greedy 
+Símbolos: ['A', 'B', 'C']
+Frecuencias: [5, 2, 1]
+Mejor costo: 11
+Asignación (símbolo -> código): {'C': '00', 'B': '01', 'A': '1'}
+Tiempo de ejecución: 0.000017 segundos
+
+
+---------------------------------------------
+
+Ejemplo 2
+
+Huffman Brute Force 
+Símbolos: ['A', 'B', 'C', 'D']
+Frecuencias: [5, 2, 1, 1]
+Mejor costo: 15
+Asignación (símbolo -> longitud): {'A': 1, 'B': 2, 'C': 3, 'D': 3}
+Tiempo de ejecución: 0.000149 segundos
+
+
+Huffman Greedy 
+Símbolos: ['A', 'B', 'C', 'D']
+Frecuencias: [5, 2, 1, 1]
+Mejor costo: 15
+Asignación (símbolo -> código): {'B': '00', 'C': '010', 'D': '011', 'A': '1'}
+Tiempo de ejecución: 0.000019 segundos
+
+
+
