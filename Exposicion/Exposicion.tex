@@ -57,8 +57,8 @@
 
 % Comandos personalizados para algoritmos
 \makeatletter
-\newcommand{\REQUIRE}{\item[\algorithmicrequire]}
-\newcommand{\ENSURE}{\item[\algorithmicensure]}
+\newcommand{\REQUIRE}{\State[\algorithmicrequire]}
+\newcommand{\ENSURE}{\State[\algorithmicensure]}
 \makeatother
 
 % ====== Title data ======
@@ -142,34 +142,47 @@ $O(2^n \cdot n^2)$ - Exponencial
 
 \subsubsection{Pseudocódigo (Brute Force)}
 \begin{frame}[fragile]{Activity Selection - Pseudocódigo Fuerza Bruta}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Lista de actividades $(start, end)$
-\ENSURE Subconjunto de máximo tamaño de actividades compatibles
-\State $n \leftarrow$ número de actividades
-\State $best \leftarrow$ lista vacía
+\REQUIRE Un arreglo $activities$ de $n$ elementos donde cada elemento es una tupla $(start, end)$
+\ENSURE El subconjunto de máximo tamaño de actividades mutuamente compatibles
+\State $n \leftarrow$ longitud de $activities$ \Comment{Cantidad de actividades}
+\State $best \leftarrow$ lista vacía \Comment{Mejor subconjunto encontrado}
+\Comment{Probar todos los subconjuntos posibles}
 \For{$r = 1$ to $n$}
     \For{cada $subset$ en $combinations(activities, r)$}
-        \If{$is\_valid(subset)$ $\land$ $|subset| > |best|$}
-            \State $best \leftarrow subset$
+        \If{$is\_valid(subset)$ $\land$ $|subset| > |best|$} \Comment{Compatibilidad y tamaño}
+            \State $best \leftarrow subset$ \Comment{Actualizar mejor solución}
         \EndIf
     \EndFor
 \EndFor
 \Return $best$
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Brute Force)}
-\begin{frame}{Activity Selection - Ejemplo Fuerza Bruta}
+\begin{frame}[allowframebreaks]{Activity Selection - Ejemplo Fuerza Bruta}
 \begin{exampleblock}{Actividades: [(1,3), (2,5), (4,6)]}
+\textbf{Paso 1:} Identificar actividades A=(1,3), B=(2,5), C=(4,6)
+\\
+\textbf{Paso 2:} Subconjuntos de tamaño 1
 \begin{itemize}
-\item \textbf{Subconjuntos de tamaño 1}: Todos válidos
-\item \textbf{Subconjuntos de tamaño 2}: 
-\begin{itemize}
-\item \{A,B\}: Inválido (se solapan)
-\item \{A,C\}: Válido
-\item \{B,C\}: Inválido (se solapan)
+    \item \{A\}, \{B\}, \{C\}: Todos válidos
 \end{itemize}
-\item \textbf{Subconjunto de tamaño 3}: Inválido
+\textbf{Mejor hasta ahora:} tamaño 1
+\\
+\textbf{Paso 3:} Subconjuntos de tamaño 2
+\begin{itemize}
+    \item \{A,B\}: 3 > 2 $\rightarrow$ Se solapan $\rightarrow$ Inválido
+    \item \{A,C\}: 3 $\le$ 4 $\rightarrow$ No se solapan $\rightarrow$ Válido
+    \item \{B,C\}: 5 > 4 $\rightarrow$ Se solapan $\rightarrow$ Inválido
+\end{itemize}
+\textbf{Mejor hasta ahora:} \{A,C\}
+\\
+\textbf{Paso 4:} Subconjunto de tamaño 3
+\begin{itemize}
+    \item \{A,B,C\}: Hay solapamientos $\rightarrow$ Inválido
 \end{itemize}
 \end{exampleblock}
 
@@ -194,36 +207,43 @@ $O(n \log n)$ - Polinomial (óptimo)
 
 \subsubsection{Pseudocódigo (Greedy)}
 \begin{frame}[fragile]{Activity Selection - Pseudocódigo Greedy}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Arreglos $start$ y $finish$ de $n$ actividades
-\ENSURE Número máximo de actividades compatibles
-\State Ordenar actividades por $finish$
-\State $count \leftarrow 1$, $j \leftarrow 0$
+\REQUIRE Arreglos $start$ y $finish$ de $n$ elementos con tiempos de inicio y fin
+\ENSURE El número máximo de actividades mutuamente compatibles
+\State $activities \leftarrow$ lista de tuplas $(start[i], finish[i])$ para $i=0..n-1$ \Comment{Crear pares inicio-fin}
+\State Ordenar $activities$ por tiempo de finalización ascendente \Comment{Clave para optimalidad}
+\State $count \leftarrow 1$ \Comment{Al menos una actividad puede realizarse}
+\State $j \leftarrow 0$ \Comment{Índice de la última actividad seleccionada}
 \For{$i = 1$ to $n-1$}
-    \If{$start[i] > finish[j]$}
-        \State $count \leftarrow count + 1$
-        \State $j \leftarrow i$
+    \If{$activities[i].start > activities[j].finish$} \Comment{Verifica no solapamiento}
+        \State $count \leftarrow count + 1$ \Comment{Selecciona actividad}
+        \State $j \leftarrow i$ \Comment{Actualiza última seleccionada}
     \EndIf
 \EndFor
 \Return $count$
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Greedy)}
-\begin{frame}{Activity Selection - Ejemplo Greedy}
-\begin{exampleblock}{Actividades ordenadas: [(1,2), (3,4), (0,6), (5,7), (8,9), (5,9)]}
-\begin{itemize}
-\item Seleccionar (1,2)
-\item Seleccionar (3,4) - No se solapa
-\item Omitir (0,6) - Se solapa
-\item Seleccionar (5,7) - No se solapa
-\item Seleccionar (8,9) - No se solapa
-\item Omitir (5,9) - Se solapa
-\end{itemize}
+\begin{frame}[allowframebreaks]{Activity Selection - Ejemplo Greedy}
+\begin{exampleblock}{Actividades = [(1, 2), (3, 4), (0, 6), (5, 7), (8, 9), (5, 9)]}
+\textbf{Paso 1:} Crear tuplas y ordenar por fin: (1,2), (3,4), (0,6), (5,7), (8,9), (5,9)
 \end{exampleblock}
 
-\begin{block}{Resultado}
-4 actividades seleccionadas: [(1,2), (3,4), (5,7), (8,9)]
+\begin{block}{Iteraciones}
+\begin{itemize}
+    \item i=1: (3,4). ¿3 > 2? Sí $\rightarrow$ Seleccionar, count=2, j=1
+    \item i=2: (0,6). ¿0 > 4? No $\rightarrow$ Omitir
+    \item i=3: (5,7). ¿5 > 4? Sí $\rightarrow$ Seleccionar, count=3, j=3
+    \item i=4: (8,9). ¿8 > 7? Sí $\rightarrow$ Seleccionar, count=4, j=4
+    \item i=5: (5,9). ¿5 > 9? No $\rightarrow$ Omitir
+\end{itemize}
+\end{block}
+
+\begin{block}{Resultado Final}
+4 actividades: (1,2), (3,4), (5,7), (8,9)
 \end{block}
 \end{frame}
 
@@ -296,11 +316,12 @@ $O(k^n \cdot n \cdot m)$ - Exponencial
 
 \subsubsection{Pseudocódigo (Brute Force)}
 \begin{frame}[fragile]{Graph Coloring - Pseudocódigo Fuerza Bruta}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Grafo $G$, número máximo de colores $k$
+\REQUIRE Grafo $G$ (lista de adyacencia), número máximo de colores $k$
 \ENSURE Asignación válida de colores o null
-\For{cada $assignment$ en $product(range(k), repeat=n)$}
-    \If{$is\_valid(G, assignment)$}
+\For{cada $assignment$ en $product(range(k), repeat=n)$} \Comment{Todas las asignaciones de $k$ colores}
+    \If{$is\_valid(G, assignment)$} \Comment{Verifica restricción de coloreo}
         \Return $assignment$
     \EndIf
 \EndFor
@@ -309,16 +330,17 @@ $O(k^n \cdot n \cdot m)$ - Exponencial
 
 \begin{algorithmic}[1]
 \Function{is\_valid}{$G$, $colors$}
-\For{$u = 0$ to $|G|-1$}
-    \For{cada $v$ en $G[u]$}
+\For{$u = 0$ to $|G|-1$} \Comment{Recorrer todos los vértices}
+    \For{cada $v$ en $G[u]$} \Comment{Revisar vecinos}
         \If{$colors[u] = colors[v]$}
-            \Return false
+            \Return false \Comment{Vértices adyacentes con mismo color}
         \EndIf
     \EndFor
 \EndFor
 \Return true
 \EndFunction
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Brute Force)}
@@ -356,19 +378,39 @@ $O(V^2 + E)$ - Polinomial
 
 \subsubsection{Pseudocódigo (Greedy)}
 \begin{frame}[fragile]{Graph Coloring - Pseudocódigo Greedy}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Grafo $G$ con $V$ vértices
+\REQUIRE Grafo $G$ (lista de adyacencia) con $V$ vértices
 \ENSURE Asignación válida de colores
-\State $result \leftarrow$ arreglo de tamaño $V$ inicializado en -1
-\State $result[0] \leftarrow 0$
+\State $result \leftarrow$ arreglo de tamaño $V$ inicializado en $-1$ \Comment{Colores por vértice}
+\State $result[0] \leftarrow 0$ \Comment{Color al primer vértice}
+\State $available \leftarrow$ arreglo booleano de tamaño $V$ en false \Comment{Colores ocupados por vecinos}
 \For{$u = 1$ to $V-1$}
-    \State Marcar colores de vecinos como no disponibles
-    \State Encontrar primer color disponible $cr$
-    \State $result[u] \leftarrow cr$
-    \State Resetear marcas de disponibilidad
+    \Comment{Marcar colores de vecinos como no disponibles}
+    \For{$i=0$ to $|adj[u]|-1$}
+        \If{$result[adj[u][i]] \neq -1$}
+            \State $available[result[adj[u][i]]] \leftarrow$ true
+        \EndIf
+    \EndFor
+    \Comment{Encontrar el primer color disponible}
+    \State $cr \leftarrow 0$
+    \While{$cr < V$}
+        \If{$available[cr] = false$}
+            \State \textbf{break}
+        \EndIf
+        \State $cr \leftarrow cr + 1$
+    \EndWhile
+    \State $result[u] \leftarrow cr$ \Comment{Asignar color encontrado}
+    \Comment{Resetear disponibilidad para el siguiente vértice}
+    \For{$i = 0$ to $|adj[u]|-1$}
+        \If{$result[adj[u][i]] \neq -1$}
+            \State $available[result[adj[u][i]]] \leftarrow$ false
+        \EndIf
+    \EndFor
 \EndFor
 \Return $result$
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Greedy)}
@@ -473,33 +515,41 @@ $O(n! \cdot n)$ - Factorial
 
 \subsubsection{Pseudocódigo (Brute Force)}
 \begin{frame}[fragile]{Job Scheduling - Pseudocódigo Fuerza Bruta}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Lista de trabajos $(id, deadline, profit)$
-\ENSURE Programación con máxima ganancia
-\State $max\_profit \leftarrow 0$, $best\_schedule \leftarrow$ []
+\REQUIRE Una lista $jobs$ de $n$ elementos donde cada elemento es $(id, deadline, profit)$
+\ENSURE La mejor programación y la ganancia máxima
+\State $max\_profit \leftarrow 0$
+\State $best\_schedule \leftarrow$ lista vacía
+\Comment{Probar todas las permutaciones posibles}
 \For{cada $perm$ en $permutations(jobs)$}
-    \State $time \leftarrow 0$, $profit \leftarrow 0$, $schedule \leftarrow$ []
+    \State $time \leftarrow 0$ \Comment{Tiempo actual}
+    \State $profit \leftarrow 0$ \Comment{Ganancia acumulada}
+    \State $schedule \leftarrow$ lista vacía \Comment{Programación actual}
     \For{cada $job$ en $perm$}
-        \If{$time < job.deadline$}
-            \State $schedule.append(job)$, $profit \leftarrow profit + job.profit$
+        \If{$time < job.deadline$} \Comment{Verifica deadline}
+            \State $schedule.append(job)$
+            \State $profit \leftarrow profit + job.profit$
             \State $time \leftarrow time + 1$
         \EndIf
     \EndFor
     \If{$profit > max\_profit$}
-        \State $max\_profit \leftarrow profit$, $best\_schedule \leftarrow schedule$
+        \State $max\_profit \leftarrow profit$
+        \State $best\_schedule \leftarrow schedule$
     \EndIf
 \EndFor
 \Return $best\_schedule, max\_profit$
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Brute Force)}
 \begin{frame}{Job Scheduling - Ejemplo Fuerza Bruta}
 \begin{exampleblock}{Trabajos: [(a,2,100), (b,1,19), (c,2,27), (d,1,25), (e,3,15)]}
 \begin{itemize}
-\item \textbf{Permutación 1}: [a,b,c,d,e] → Ganancia: 142
-\item \textbf{Permutación 2}: [b,a,c,d,e] → Ganancia: 134
-\item \textbf{Permutación 3}: [d,a,c,b,e] → Ganancia: 140
+\item \textbf{Permutación 1}: [a,b,c,d,e] $\rightarrow$ Ganancia: 142
+\item \textbf{Permutación 2}: [b,a,c,d,e] $\rightarrow$ Ganancia: 134
+\item \textbf{Permutación 3}: [d,a,c,b,e] $\rightarrow$ Ganancia: 140
 \item \textbf{Mejor}: [a,c,e] con ganancia 142
 \end{itemize}
 \end{exampleblock}
@@ -525,39 +575,47 @@ $O(n \log n + n \cdot d)$ - Polinomial
 
 \subsubsection{Pseudocódigo (Greedy)}
 \begin{frame}[fragile]{Job Scheduling - Pseudocódigo Greedy}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Lista de trabajos $(id, deadline, profit)$
-\ENSURE Programación y ganancia total
-\State Ordenar trabajos por profit descendente
-\State $max\_d \leftarrow \max(deadlines)$
-\State $slots \leftarrow$ arreglo de tamaño $max\_d+1$ inicializado en -1
-\State $total\_profit \leftarrow 0$
-\For{cada $job$ en trabajos ordenados}
-    \For{$t = job.deadline$ to $1$}
+\REQUIRE Lista $jobs$ donde cada trabajo tiene $(id, deadline, profit)$
+\ENSURE Lista de trabajos seleccionados y ganancia total
+\State Ordenar $jobs$ por ganancia en orden descendente \Comment{Prioriza ganancias altas}
+\State $max\_deadline \leftarrow \max\{job.deadline \;\forall job\in jobs\}$
+\State $slots \leftarrow$ arreglo de tamaño $max\_deadline + 1$ inicializado en $-1$ \Comment{Slots de tiempo}
+\State $total\_profit \leftarrow 0$, $scheduled\_jobs \leftarrow$ lista vacía
+\For{cada $job$ en $jobs$}
+    \For{$t \gets job.deadline;\ t \geq 1;\ t \gets t-1$} \Comment{Buscar slot más tardío disponible}
         \If{$slots[t] = -1$}
-            \State $slots[t] \leftarrow job.id$, $total\_profit \leftarrow total\_profit + job.profit$
+            \State $slots[t] \leftarrow job.id$
+            \State $total\_profit \leftarrow total\_profit + job.profit$
+            \State $scheduled\_jobs.append(job.id)$
             \State \textbf{break}
         \EndIf
     \EndFor
 \EndFor
-\Return trabajos en $slots$, $total\_profit$
+\Return $scheduled\_jobs, total\_profit$
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Greedy)}
-\begin{frame}{Job Scheduling - Ejemplo Greedy}
-\begin{exampleblock}{Trabajos ordenados: [a(100), c(27), d(25), b(19), e(15)]}
-\begin{itemize}
-\item \textbf{a}(deadline=2): Slot 2 → Profit=100
-\item \textbf{c}(deadline=2): Slot 1 → Profit=127
-\item \textbf{d}(deadline=1): No hay slot disponible
-\item \textbf{b}(deadline=1): No hay slot disponible
-\item \textbf{e}(deadline=3): Slot 3 → Profit=142
-\end{itemize}
+\begin{frame}[allowframebreaks]{Job Scheduling - Ejemplo Greedy}
+\begin{exampleblock}{Trabajos = [A(2,100), B(1,19), C(2,27), D(1,25), E(3,15)]}
+\textbf{Orden por ganancia:} A(100), C(27), D(25), B(19), E(15)
 \end{exampleblock}
 
-\begin{block}{Resultado}
-Programación: [c, a, e] con ganancia 142 (óptima)
+\begin{block}{Asignación}
+\begin{itemize}
+    \item A (d=2): buscar t=2..1 $\rightarrow$ t=2 libre $\rightarrow$ slots[2]=A, total=100
+    \item C (d=2): t=2 ocupado, t=1 libre $\rightarrow$ slots[1]=C, total=127
+    \item D (d=1): t=1 ocupado $\rightarrow$ no asignar
+    \item B (d=1): t=1 ocupado $\rightarrow$ no asignar
+    \item E (d=3): t=3 libre $\rightarrow$ slots[3]=E, total=142
+\end{itemize}
+\end{block}
+
+\begin{block}{Resultado Final}
+Programación: [C, A, E] con ganancia total 142
 \end{block}
 \end{frame}
 
@@ -656,7 +714,7 @@ $O(C_{n-1} \cdot n! \cdot n)$ - Super-exponencial
 \item Número de árboles: $C_3 = 5$
 \item Permutaciones por árbol: $4! = 24$
 \item Total: $5 \times 24 = 120$ asignaciones
-\item \textbf{Mejor}: A→1, B→2, C→2, D→3 (Costo=14)
+\item \textbf{Mejor}: A$\rightarrow$1, B$\rightarrow$2, C$\rightarrow$2, D$\rightarrow$3 (Costo=14)
 \end{itemize}
 \end{exampleblock}
 
@@ -682,23 +740,30 @@ $O(n \log n)$ - Polinomial (óptimo)
 
 \subsubsection{Pseudocódigo (Greedy)}
 \begin{frame}[fragile]{Huffman Codes - Pseudocódigo Greedy}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Símbolos y frecuencias
+\REQUIRE Lista de símbolos $s$ y frecuencias $freq$
 \ENSURE Códigos Huffman óptimos
-\State $pq \leftarrow$ min-heap vacío
-\For{cada símbolo}
-    \State $pq.push(Node(freq))$
+\State $n \leftarrow$ longitud de $s$
+\State $pq \leftarrow$ cola de prioridad (min-heap) vacía \Comment{Menor frecuencia primero}
+\Comment{Crear nodos hoja para cada símbolo}
+\For{$i = 0$ to $n-1$}
+    \State $tmp \leftarrow Node(freq[i])$
+    \State $pq.push(tmp)$
 \EndFor
-\While{$|pq| > 1$}
-    \State $l \leftarrow pq.pop()$, $r \leftarrow pq.pop()$
+\Comment{Construir árbol de Huffman}
+\While{$|pq| \geq 2$}
+    \State $l \leftarrow pq.pop()$ \Comment{Nodo con menor frecuencia}
+    \State $r \leftarrow pq.pop()$ \Comment{Siguiente menor}
     \State $new \leftarrow Node(l.freq + r.freq)$
     \State $new.left \leftarrow l$, $new.right \leftarrow r$
     \State $pq.push(new)$
 \EndWhile
 \State $root \leftarrow pq.pop()$
-\State Generar códigos con recorrido preorden
-\Return códigos
+\State Generar códigos con recorrido preorden desde $root$
+\Return lista de códigos por símbolo
 \end{algorithmic}
+\normalsize
 \end{frame}
 
 \subsubsection{Ejemplo explicativo (Greedy)}
@@ -714,7 +779,7 @@ $O(n \log n)$ - Polinomial (óptimo)
 \end{exampleblock}
 
 \begin{block}{Resultado}
-Códigos óptimos: f→0, c→100, d→101, a→1100, b→1101, e→111
+Códigos óptimos: f$\rightarrow$0, c$\rightarrow$100, d$\rightarrow$101, a$\rightarrow$1100, b$\rightarrow$1101, e$\rightarrow$111
 \end{block}
 \end{frame}
 

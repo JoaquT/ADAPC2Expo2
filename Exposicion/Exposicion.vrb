@@ -1,18 +1,25 @@
 \frametitle{Huffman Codes - Pseudocódigo Greedy}
+\scriptsize
 \begin{algorithmic}[1]
-\REQUIRE Símbolos y frecuencias
+\REQUIRE Lista de símbolos $s$ y frecuencias $freq$
 \ENSURE Códigos Huffman óptimos
-\State $pq \leftarrow$ min-heap vacío
-\For{cada símbolo}
-    \State $pq.push(Node(freq))$
+\State $n \leftarrow$ longitud de $s$
+\State $pq \leftarrow$ cola de prioridad (min-heap) vacía \Comment{Menor frecuencia primero}
+\Comment{Crear nodos hoja para cada símbolo}
+\For{$i = 0$ to $n-1$}
+    \State $tmp \leftarrow Node(freq[i])$
+    \State $pq.push(tmp)$
 \EndFor
-\While{$|pq| > 1$}
-    \State $l \leftarrow pq.pop()$, $r \leftarrow pq.pop()$
+\Comment{Construir árbol de Huffman}
+\While{$|pq| \geq 2$}
+    \State $l \leftarrow pq.pop()$ \Comment{Nodo con menor frecuencia}
+    \State $r \leftarrow pq.pop()$ \Comment{Siguiente menor}
     \State $new \leftarrow Node(l.freq + r.freq)$
     \State $new.left \leftarrow l$, $new.right \leftarrow r$
     \State $pq.push(new)$
 \EndWhile
 \State $root \leftarrow pq.pop()$
-\State Generar códigos con recorrido preorden
-\Return códigos
+\State Generar códigos con recorrido preorden desde $root$
+\Return lista de códigos por símbolo
 \end{algorithmic}
+\normalsize
