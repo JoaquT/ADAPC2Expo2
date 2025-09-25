@@ -286,8 +286,10 @@ Brute Force & 12 & 76.587371 \\
 \caption{Tiempos de ejecución comparativos}
 \end{table}
 
+\scriptsize
 \begin{block}{Conclusión}
 \begin{itemize}
+
 \item Greedy es óptimo y eficiente para este problema
 \item Fuerza bruta solo práctico para instancias pequeñas ($n < 20$)
 \item El ordenamiento por tiempo de finalización garantiza optimalidad
@@ -427,16 +429,32 @@ $O(V^2 + E)$ - Polinomial
     \EndWhile
     \State $result[u] \leftarrow cr$ \Comment{Asignar color encontrado}
     \Comment{Resetear disponibilidad para el siguiente vértice}
-    \For{$i = 0$ to $|adj[u]|-1$}
-        \If{$result[adj[u][i]] \neq -1$}
-            \State $available[result[adj[u][i]]] \leftarrow$ false
-        \EndIf
-    \EndFor
-\EndFor
-\Return $result$
+    \algstore{graphcoloringGREEDY}
 \end{algorithmic}
 \normalsize
 \end{frame}
+
+\begin{frame}[fragile]{Graph Coloring - Pseudocódigo Greedy}
+    
+    \begin{algorithmic}[1]
+    \algrestore{graphcoloringGREEDY}
+        \State $result[u] \leftarrow cr$ \Comment{Asignar color encontrado}
+        \Comment{Resetear disponibilidad para el siguiente vértice}
+        \For{$i = 0$ to $|adj[u]|-1$}
+            \If{$result[adj[u][i]] \neq -1$}
+                \State $available[result[adj[u][i]]] \leftarrow$ false
+            \EndIf
+        \EndFor
+    \EndFor
+    \Return $result$
+    \end{algorithmic}
+    \normalsize
+\end{frame}
+
+
+
+
+
 
 \subsubsection{Ejemplo explicativo (Greedy)}
 \begin{frame}{Graph Coloring - Ejemplo Greedy}

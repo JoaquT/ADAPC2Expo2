@@ -569,6 +569,10 @@ OUTPUT Exposicion.vrb
 INPUT .\Exposicion.vrb
 INPUT .\Exposicion.vrb
 INPUT Exposicion.vrb
+OUTPUT Exposicion.vrb
+INPUT .\Exposicion.vrb
+INPUT .\Exposicion.vrb
+INPUT Exposicion.vrb
 INPUT .\Exposicion.toc
 INPUT .\Exposicion.toc
 INPUT Exposicion.toc

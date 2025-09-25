@@ -15,24 +15,24 @@
 \beamer@subsubsectionintoc {2}{2}{2}{Ejemplo explicativo (Brute Force)}{19}{0}{2}
 \beamer@subsectionintoc {2}{3}{Enfoque Greedy}{20}{0}{2}
 \beamer@subsubsectionintoc {2}{3}{1}{Pseudocódigo (Greedy)}{21}{0}{2}
-\beamer@subsubsectionintoc {2}{3}{2}{Ejemplo explicativo (Greedy)}{22}{0}{2}
-\beamer@subsectionintoc {2}{4}{Análisis comparativo de complejidad}{23}{0}{2}
-\beamer@sectionintoc {3}{Problema 3: Job Scheduling with Deadlines}{25}{0}{3}
-\beamer@subsectionintoc {3}{1}{Enunciado}{26}{0}{3}
-\beamer@subsectionintoc {3}{2}{Enfoque de Fuerza Bruta}{27}{0}{3}
-\beamer@subsubsectionintoc {3}{2}{1}{Pseudocódigo (Brute Force)}{28}{0}{3}
-\beamer@subsubsectionintoc {3}{2}{2}{Ejemplo explicativo (Brute Force)}{29}{0}{3}
-\beamer@subsectionintoc {3}{3}{Enfoque Greedy}{30}{0}{3}
-\beamer@subsubsectionintoc {3}{3}{1}{Pseudocódigo (Greedy)}{31}{0}{3}
-\beamer@subsubsectionintoc {3}{3}{2}{Ejemplo explicativo (Greedy)}{32}{0}{3}
-\beamer@subsectionintoc {3}{4}{Análisis comparativo de complejidad}{33}{0}{3}
-\beamer@sectionintoc {4}{Problema 4: Huffman Codes}{35}{0}{4}
-\beamer@subsectionintoc {4}{1}{Enunciado}{36}{0}{4}
-\beamer@subsectionintoc {4}{2}{Enfoque de Fuerza Bruta}{37}{0}{4}
-\beamer@subsubsectionintoc {4}{2}{1}{Pseudocódigo (Brute Force)}{38}{0}{4}
-\beamer@subsubsectionintoc {4}{2}{2}{Ejemplo explicativo (Brute Force)}{39}{0}{4}
-\beamer@subsectionintoc {4}{3}{Enfoque Greedy}{40}{0}{4}
-\beamer@subsubsectionintoc {4}{3}{1}{Pseudocódigo (Greedy)}{41}{0}{4}
-\beamer@subsubsectionintoc {4}{3}{2}{Ejemplo explicativo (Greedy)}{42}{0}{4}
-\beamer@subsectionintoc {4}{4}{Análisis comparativo de complejidad}{43}{0}{4}
-\beamer@sectionintoc {5}{Conclusiones y Recomendaciones}{45}{0}{5}
+\beamer@subsubsectionintoc {2}{3}{2}{Ejemplo explicativo (Greedy)}{23}{0}{2}
+\beamer@subsectionintoc {2}{4}{Análisis comparativo de complejidad}{24}{0}{2}
+\beamer@sectionintoc {3}{Problema 3: Job Scheduling with Deadlines}{26}{0}{3}
+\beamer@subsectionintoc {3}{1}{Enunciado}{27}{0}{3}
+\beamer@subsectionintoc {3}{2}{Enfoque de Fuerza Bruta}{28}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{1}{Pseudocódigo (Brute Force)}{29}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{2}{Ejemplo explicativo (Brute Force)}{30}{0}{3}
+\beamer@subsectionintoc {3}{3}{Enfoque Greedy}{31}{0}{3}
+\beamer@subsubsectionintoc {3}{3}{1}{Pseudocódigo (Greedy)}{32}{0}{3}
+\beamer@subsubsectionintoc {3}{3}{2}{Ejemplo explicativo (Greedy)}{33}{0}{3}
+\beamer@subsectionintoc {3}{4}{Análisis comparativo de complejidad}{34}{0}{3}
+\beamer@sectionintoc {4}{Problema 4: Huffman Codes}{36}{0}{4}
+\beamer@subsectionintoc {4}{1}{Enunciado}{37}{0}{4}
+\beamer@subsectionintoc {4}{2}{Enfoque de Fuerza Bruta}{38}{0}{4}
+\beamer@subsubsectionintoc {4}{2}{1}{Pseudocódigo (Brute Force)}{39}{0}{4}
+\beamer@subsubsectionintoc {4}{2}{2}{Ejemplo explicativo (Brute Force)}{40}{0}{4}
+\beamer@subsectionintoc {4}{3}{Enfoque Greedy}{41}{0}{4}
+\beamer@subsubsectionintoc {4}{3}{1}{Pseudocódigo (Greedy)}{42}{0}{4}
+\beamer@subsubsectionintoc {4}{3}{2}{Ejemplo explicativo (Greedy)}{43}{0}{4}
+\beamer@subsectionintoc {4}{4}{Análisis comparativo de complejidad}{44}{0}{4}
+\beamer@sectionintoc {5}{Conclusiones y Recomendaciones}{46}{0}{5}
