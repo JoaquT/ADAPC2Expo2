@@ -8,31 +8,31 @@
 \beamer@subsubsectionintoc {1}{3}{1}{Pseudocódigo (Greedy)}{11}{0}{1}
 \beamer@subsubsectionintoc {1}{3}{2}{Ejemplo explicativo (Greedy)}{12}{0}{1}
 \beamer@subsectionintoc {1}{4}{Análisis comparativo de complejidad}{13}{0}{1}
-\beamer@sectionintoc {2}{Problema 2: Graph Coloring}{14}{0}{2}
-\beamer@subsectionintoc {2}{1}{Enunciado}{15}{0}{2}
-\beamer@subsectionintoc {2}{2}{Enfoque de Fuerza Bruta}{16}{0}{2}
-\beamer@subsubsectionintoc {2}{2}{1}{Pseudocódigo (Brute Force)}{17}{0}{2}
-\beamer@subsubsectionintoc {2}{2}{2}{Ejemplo explicativo (Brute Force)}{18}{0}{2}
-\beamer@subsectionintoc {2}{3}{Enfoque Greedy}{19}{0}{2}
-\beamer@subsubsectionintoc {2}{3}{1}{Pseudocódigo (Greedy)}{20}{0}{2}
-\beamer@subsubsectionintoc {2}{3}{2}{Ejemplo explicativo (Greedy)}{21}{0}{2}
-\beamer@subsectionintoc {2}{4}{Análisis comparativo de complejidad}{22}{0}{2}
-\beamer@sectionintoc {3}{Problema 3: Job Scheduling with Deadlines}{23}{0}{3}
-\beamer@subsectionintoc {3}{1}{Enunciado}{24}{0}{3}
-\beamer@subsectionintoc {3}{2}{Enfoque de Fuerza Bruta}{25}{0}{3}
-\beamer@subsubsectionintoc {3}{2}{1}{Pseudocódigo (Brute Force)}{26}{0}{3}
-\beamer@subsubsectionintoc {3}{2}{2}{Ejemplo explicativo (Brute Force)}{27}{0}{3}
-\beamer@subsectionintoc {3}{3}{Enfoque Greedy}{28}{0}{3}
-\beamer@subsubsectionintoc {3}{3}{1}{Pseudocódigo (Greedy)}{29}{0}{3}
-\beamer@subsubsectionintoc {3}{3}{2}{Ejemplo explicativo (Greedy)}{30}{0}{3}
-\beamer@subsectionintoc {3}{4}{Análisis comparativo de complejidad}{31}{0}{3}
-\beamer@sectionintoc {4}{Problema 4: Huffman Codes}{32}{0}{4}
-\beamer@subsectionintoc {4}{1}{Enunciado}{33}{0}{4}
-\beamer@subsectionintoc {4}{2}{Enfoque de Fuerza Bruta}{34}{0}{4}
-\beamer@subsubsectionintoc {4}{2}{1}{Pseudocódigo (Brute Force)}{35}{0}{4}
-\beamer@subsubsectionintoc {4}{2}{2}{Ejemplo explicativo (Brute Force)}{36}{0}{4}
-\beamer@subsectionintoc {4}{3}{Enfoque Greedy}{37}{0}{4}
-\beamer@subsubsectionintoc {4}{3}{1}{Pseudocódigo (Greedy)}{38}{0}{4}
-\beamer@subsubsectionintoc {4}{3}{2}{Ejemplo explicativo (Greedy)}{39}{0}{4}
-\beamer@subsectionintoc {4}{4}{Análisis comparativo de complejidad}{40}{0}{4}
-\beamer@sectionintoc {5}{Conclusiones y Recomendaciones}{41}{0}{5}
+\beamer@sectionintoc {2}{Problema 2: Graph Coloring}{15}{0}{2}
+\beamer@subsectionintoc {2}{1}{Enunciado}{16}{0}{2}
+\beamer@subsectionintoc {2}{2}{Enfoque de Fuerza Bruta}{17}{0}{2}
+\beamer@subsubsectionintoc {2}{2}{1}{Pseudocódigo (Brute Force)}{18}{0}{2}
+\beamer@subsubsectionintoc {2}{2}{2}{Ejemplo explicativo (Brute Force)}{19}{0}{2}
+\beamer@subsectionintoc {2}{3}{Enfoque Greedy}{20}{0}{2}
+\beamer@subsubsectionintoc {2}{3}{1}{Pseudocódigo (Greedy)}{21}{0}{2}
+\beamer@subsubsectionintoc {2}{3}{2}{Ejemplo explicativo (Greedy)}{22}{0}{2}
+\beamer@subsectionintoc {2}{4}{Análisis comparativo de complejidad}{23}{0}{2}
+\beamer@sectionintoc {3}{Problema 3: Job Scheduling with Deadlines}{25}{0}{3}
+\beamer@subsectionintoc {3}{1}{Enunciado}{26}{0}{3}
+\beamer@subsectionintoc {3}{2}{Enfoque de Fuerza Bruta}{27}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{1}{Pseudocódigo (Brute Force)}{28}{0}{3}
+\beamer@subsubsectionintoc {3}{2}{2}{Ejemplo explicativo (Brute Force)}{29}{0}{3}
+\beamer@subsectionintoc {3}{3}{Enfoque Greedy}{30}{0}{3}
+\beamer@subsubsectionintoc {3}{3}{1}{Pseudocódigo (Greedy)}{31}{0}{3}
+\beamer@subsubsectionintoc {3}{3}{2}{Ejemplo explicativo (Greedy)}{32}{0}{3}
+\beamer@subsectionintoc {3}{4}{Análisis comparativo de complejidad}{33}{0}{3}
+\beamer@sectionintoc {4}{Problema 4: Huffman Codes}{35}{0}{4}
+\beamer@subsectionintoc {4}{1}{Enunciado}{36}{0}{4}
+\beamer@subsectionintoc {4}{2}{Enfoque de Fuerza Bruta}{37}{0}{4}
+\beamer@subsubsectionintoc {4}{2}{1}{Pseudocódigo (Brute Force)}{38}{0}{4}
+\beamer@subsubsectionintoc {4}{2}{2}{Ejemplo explicativo (Brute Force)}{39}{0}{4}
+\beamer@subsectionintoc {4}{3}{Enfoque Greedy}{40}{0}{4}
+\beamer@subsubsectionintoc {4}{3}{1}{Pseudocódigo (Greedy)}{41}{0}{4}
+\beamer@subsubsectionintoc {4}{3}{2}{Ejemplo explicativo (Greedy)}{42}{0}{4}
+\beamer@subsectionintoc {4}{4}{Análisis comparativo de complejidad}{43}{0}{4}
+\beamer@sectionintoc {5}{Conclusiones y Recomendaciones}{45}{0}{5}

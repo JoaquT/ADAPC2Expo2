@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.26)  25 SEP 2025 10:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.26)  25 SEP 2025 12:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1138,20 +1138,37 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
 
 [13
 
+]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 296.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 296.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 296.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 296.
+
+Overfull \vbox (15.1911pt too high) detected at line 296
+ []
+
+
+
+[14
+
 ] (Exposicion.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 )
-
-[14
-
-]
 
 [15
 
 ]
 
 [16
+
+]
+
+[17
 
 ]
 \openout4 = `Exposicion.vrb'.
@@ -1167,10 +1184,6 @@ LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <8> not available
 
 )
 
-[17
-
-]
-
 [18
 
 ]
@@ -1178,17 +1191,17 @@ LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <8> not available
 [19
 
 ]
-\openout4 = `Exposicion.vrb'.
-
- (Exposicion.vrb)
-Overfull \vbox (27.901pt too high) detected at line 414
- []
-
-
 
 [20
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
+Overfull \vbox (27.901pt too high) detected at line 439
+ []
+
+
 
 [21
 
@@ -1196,10 +1209,7 @@ Overfull \vbox (27.901pt too high) detected at line 414
 
 [22
 
-] (Exposicion.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-)
+]
 
 [23
 
@@ -1207,14 +1217,14 @@ LaTeX Info: Redefining \% on input line 1.
 
 [24
 
-]
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 
 [25
 
 ]
-\openout4 = `Exposicion.vrb'.
-
- (Exposicion.vrb)
 
 [26
 
@@ -1223,13 +1233,13 @@ LaTeX Info: Redefining \% on input line 1.
 [27
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
 
 [28
 
 ]
-\openout4 = `Exposicion.vrb'.
-
- (Exposicion.vrb)
 
 [29
 
@@ -1238,13 +1248,13 @@ LaTeX Info: Redefining \% on input line 1.
 [30
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
 
 [31
 
-] (Exposicion.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-)
+]
 
 [32
 
@@ -1252,14 +1262,14 @@ LaTeX Info: Redefining \% on input line 1.
 
 [33
 
-{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
+]
 
 [34
 
-]
-\openout4 = `Exposicion.vrb'.
-
- (Exposicion.vrb)
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 
 [35
 
@@ -1267,7 +1277,7 @@ LaTeX Info: Redefining \% on input line 1.
 
 [36
 
-]
+{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [37
 
@@ -1286,23 +1296,14 @@ LaTeX Info: Redefining \% on input line 1.
 
 [40
 
-] (Exposicion.toc
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-)
+]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
 
 [41
 
 ]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 844.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 844.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 844.
-LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 844.
-
 
 [42
 
@@ -1313,6 +1314,25 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
 ]
 
 [44
+
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+
+[45
+
+]
+
+[46
+
+]
+
+[47
+
+]
+
+[48
 
 ]
 \tf@nav=\write7
@@ -1333,20 +1353,20 @@ LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
  ***********
 Package rerunfilecheck Info: File `Exposicion.out' has not changed.
-(rerunfilecheck)             Checksum: C3576CC9140E29163507CE082628893C;3720.
+(rerunfilecheck)             Checksum: 502BC85B567F777836DE53938AE58CB8;3720.
  ) 
 Here is how much of TeX's memory you used:
- 39577 strings out of 469923
- 878915 string characters out of 5469170
- 1253869 words of memory out of 5000000
- 65555 multiletter control sequences out of 15000+600000
+ 39613 strings out of 469923
+ 879536 string characters out of 5469170
+ 1254623 words of memory out of 5000000
+ 65583 multiletter control sequences out of 15000+600000
  709635 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,15n,123p,1659b,947s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss17.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
-Output written on Exposicion.pdf (44 pages, 714944 bytes).
+Output written on Exposicion.pdf (48 pages, 741694 bytes).
 PDF statistics:
- 2091 PDF objects out of 2487 (max. 8388607)
- 126 named destinations out of 1000 (max. 500000)
- 2089 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2210 PDF objects out of 2487 (max. 8388607)
+ 134 named destinations out of 1000 (max. 500000)
+ 2119 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -261,6 +261,31 @@ Greedy & $O(n \log n)$ & \checkmark \\
 \end{tabular}
 \end{table}
 
+
+\end{frame}
+
+\begin{frame}{Activity Selection - Análisis Comparativo}
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{lcc}
+\toprule
+\textbf{Algoritmo} & \textbf{Actividades} & \textbf{Tiempo (segundos)} \\
+\midrule
+Greedy & 4 & 0.000016 \\
+Greedy & 5 & 0.000012 \\
+Greedy & 6 & 0.000008 \\
+Greedy & 6 & 0.000009 \\
+Brute Force & 4 & 0.000065 \\
+Brute Force & 5 & 0.001175 \\
+Brute Force & 10 & 0.156779 \\
+Brute Force & 12 & 76.587371 \\
+\bottomrule
+\end{tabular}
+\caption{Tiempos de ejecución comparativos}
+\end{table}
+
 \begin{block}{Conclusión}
 \begin{itemize}
 \item Greedy es óptimo y eficiente para este problema
@@ -458,13 +483,37 @@ Greedy & $O(V^2 + E)$ & $\times$ \\
 \end{tabular}
 \end{table}
 
-\begin{block}{Conclusión}
-\begin{itemize}
-\item Fuerza bruta garantiza optimalidad pero es impráctica
-\item Greedy es eficiente pero puede usar más colores de los necesarios
-\item En la práctica: Greedy para grafos grandes, heurísticas avanzadas para mejor aproximación
-\end{itemize}
-\end{block}
+
+\end{frame}
+
+
+
+
+\begin{frame}{Graph Coloring - Análisis Comparativo}
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Grafo} & \textbf{Algoritmo} & \textbf{Colores} & \textbf{Tiempo (segundos)} \\
+\midrule
+Graph 1 & Greedy & 3 & 0.000007 \\
+Graph 1 & Brute Force & 3 & 0.000022 \\
+Graph 2 & Greedy & 4 & 0.000006 \\
+Graph 2 & Brute Force & 3 & 0.000025 \\
+\bottomrule
+\end{tabular}
+\caption{Tiempos de ejecución comparativos}
+\end{table}
+    
+    \begin{block}{Conclusión}
+    \begin{itemize}
+    \item Fuerza bruta garantiza optimalidad pero es impráctica
+    \item Greedy es eficiente pero puede usar más colores de los necesarios
+    \item En la práctica: Greedy para grafos grandes, heurísticas avanzadas para mejor aproximación
+    \end{itemize}
+    \end{block}
 \end{frame}
 
 % =======================================================
@@ -633,13 +682,34 @@ Greedy & $O(n \log n + n \cdot d)$ & $\times$ \\
 \end{tabular}
 \end{table}
 
-\begin{block}{Conclusión}
-\begin{itemize}
-\item Greedy no siempre es óptimo pero es muy eficiente
-\item En la práctica funciona bien para la mayoría de casos
-\item Fuerza bruta solo para instancias muy pequeñas ($n < 10$)
-\end{itemize}
-\end{block}
+\end{frame}
+
+
+\begin{frame}{Job Scheduling - Análisis Comparativo}
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Ejemplo} & \textbf{Algoritmo} & \textbf{Ganancia} & \textbf{Tiempo (segundos)} \\
+\midrule
+Ejemplo 1 & Brute Force & 142 & 0.000051 \\
+Ejemplo 1 & Greedy & 142 & 0.000017 \\
+Ejemplo 2 & Brute Force & 190 & 0.001998 \\
+Ejemplo 2 & Greedy & 190 & 0.000020 \\
+\bottomrule
+\end{tabular}
+\caption{Tiempos de ejecución comparativos}
+\end{table}
+    
+    \begin{block}{Conclusión}
+    \begin{itemize}
+    \item Greedy no siempre es óptimo pero es muy eficiente
+    \item En la práctica funciona bien para la mayoría de casos
+    \item Fuerza bruta solo para instancias muy pequeñas ($n < 10$)
+    \end{itemize}
+    \end{block}
 \end{frame}
 
 % =======================================================
@@ -805,6 +875,34 @@ Greedy & $O(n \log n)$ & \checkmark \\
 \item Algoritmo ampliamente usado en compresión
 \end{itemize}
 \end{block}
+\end{frame}
+
+\begin{frame}{Huffman Codes - Análisis Comparativo}
+
+\begin{table}
+\centering
+\small
+\begin{tabular}{lccc}
+\toprule
+\textbf{Ejemplo} & \textbf{Algoritmo} & \textbf{Costo} & \textbf{Tiempo (segundos)} \\
+\midrule
+Ejemplo 1 & Brute Force & 11 & 0.000039 \\
+Ejemplo 1 & Greedy & 11 & 0.000017 \\
+Ejemplo 2 & Brute Force & 15 & 0.000149 \\
+Ejemplo 2 & Greedy & 15 & 0.000019 \\
+\bottomrule
+\end{tabular}
+\caption{Tiempos de ejecución comparativos}
+\end{table}
+    
+    \begin{block}{Conclusión}
+    \begin{itemize}
+    \item Huffman greedy es óptimo y eficiente
+    \item Raro caso donde greedy garantiza optimalidad
+    \item Fuerza bruta completamente impráctica
+    \item Algoritmo ampliamente usado en compresión
+    \end{itemize}
+    \end{block}
 \end{frame}
 
 % =======================================================
