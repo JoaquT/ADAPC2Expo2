@@ -1,0 +1,361 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\geometry{margin=1in}
+
+\title{Pseudocódigo: Códigos de Huffman con Algoritmo Greedy}
+\author{Algoritmo Greedy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Descripción del Problema}
+%<*enunciado>
+El problema de codificación de Huffman consiste en encontrar el código de longitud variable óptimo para un conjunto de símbolos dados sus frecuencias de aparición. El objetivo es minimizar la longitud promedio de codificación, que se calcula como:
+
+$$\text{Costo} = \sum_{i=1}^{n} f_i \cdot l_i$$
+
+donde $f_i$ es la frecuencia del símbolo $i$ y $l_i$ es la longitud del código asignado al símbolo $i$.
+
+El algoritmo greedy de Huffman resuelve este problema construyendo un árbol binario óptimo mediante la selección repetitiva de los dos nodos con menor frecuencia y combinándolos en un nuevo nodo interno.
+%</enunciado>
+
+\section{Pseudocódigo}
+
+\begin{algorithm}
+\caption{Construcción del Árbol de Huffman}
+\begin{algorithmic}[1]
+%<*codigo1a>
+\REQUIRE Lista de símbolos $s$ y frecuencias $freq$
+\ENSURE Lista de códigos Huffman para cada símbolo
+
+\STATE $n \leftarrow$ longitud de $s$
+\STATE $pq \leftarrow$ cola de prioridad (min-heap) vacía
+
+\COMMENT{Crear nodos hoja para cada símbolo}
+\FOR{$i = 0$ \TO $n-1$}
+    \STATE $tmp \leftarrow Node(freq[i])$
+    \STATE $heapq.push(pq, tmp)$
+\ENDFOR
+
+\COMMENT{Construir árbol de Huffman}
+\WHILE{$|pq| \geq 2$}
+    \STATE $l \leftarrow heapq.pop(pq)$ \COMMENT{Nodo izquierdo (menor frecuencia)}
+    \STATE $r \leftarrow heapq.pop(pq)$ \COMMENT{Nodo derecho (segunda menor frecuencia)}
+    
+    \STATE $newNode \leftarrow Node(l.data + r.data)$
+    \STATE $newNode.left \leftarrow l$
+    \STATE $newNode.right \leftarrow r$
+    
+    \STATE $heapq.push(pq, newNode)$
+\ENDWHILE
+
+\STATE $root \leftarrow heapq.pop(pq)$
+\STATE $ans \leftarrow$ lista vacía
+\STATE $preOrder(root, ans, "")$
+\RETURN $ans$
+%</codigo1a>
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Recorrido Preorden para Generar Códigos}
+\begin{algorithmic}[1]
+%<*codigo1b>
+\REQUIRE Nodo raíz $root$, lista de respuestas $ans$, código actual $curr$
+\ENSURE Lista de códigos actualizada
+
+\IF{$root = \textbf{null}$}
+    \RETURN
+\ENDIF
+
+\IF{$root.left = \textbf{null}$ \AND $root.right = \textbf{null}$}
+    \STATE $ans.append(curr)$ \COMMENT{Nodo hoja representa un carácter}
+    \RETURN
+\ENDIF
+
+\STATE $preOrder(root.left, ans, curr + '0')$
+\STATE $preOrder(root.right, ans, curr + '1')$
+%</codigo1b>
+\end{algorithmic}
+\end{algorithm}
+
+\section{Explicación del Algoritmo}
+
+\subsection{Estrategia Greedy}
+%<*exp1>
+El algoritmo greedy de Huffman utiliza la siguiente estrategia:
+
+\begin{itemize}
+    \item \textbf{Selección greedy:} En cada iteración, selecciona los dos nodos con menor frecuencia
+    \item \textbf{Combinación:} Combina estos nodos en un nuevo nodo interno cuya frecuencia es la suma
+    \item \textbf{Construcción incremental:} Construye el árbol de abajo hacia arriba
+    \item \textbf{Optimalidad:} La elección greedy garantiza la construcción del árbol óptimo
+\end{itemize}
+
+La elección de combinar siempre los dos nodos de menor frecuencia es óptima porque:
+\begin{itemize}
+    \item Los símbolos con menor frecuencia deben tener los códigos más largos
+    \item Al combinar los dos de menor frecuencia, se minimiza el costo total
+\end{itemize}
+%</exp1>
+
+\subsection{Propiedad de Elección Greedy}
+%<*exp2>
+El algoritmo de Huffman satisface la propiedad de elección greedy:
+
+\textbf{Teorema:} Si $x$ y $y$ son los dos caracteres con menor frecuencia, entonces existe un código óptimo donde $x$ y $y$ son hermanos (comparten el mismo padre) y tienen las longitudes de código más largas.
+
+\textbf{Demostración intuitiva:}
+\begin{itemize}
+    \item Si $x$ y $y$ no son hermanos en algún código óptimo, se puede intercambiar con sus hermanos actuales
+    \item Esto no aumenta el costo total y mantiene la optimalidad
+    \item Por lo tanto, siempre es seguro combinarlos primero
+\end{itemize}
+%</exp2>
+
+\subsection{Complejidad}
+%<*exp3>
+\begin{itemize}
+    \item \textbf{Tiempo:} $O(n \log n)$
+    \begin{itemize}
+        \item $O(n)$ para crear los nodos iniciales
+        \item $O(n \log n)$ para las operaciones del heap (n-1 extracciones y inserciones)
+        \item $O(n)$ para el recorrido preorden
+    \end{itemize}
+    \item \textbf{Espacio:} $O(n)$ para el heap y el árbol resultante
+\end{itemize}
+
+La eficiencia del algoritmo se debe al uso de un min-heap para mantener los nodos ordenados por frecuencia.
+%</exp3>
+
+\section{Resolución Paso a Paso}
+
+\subsection{Ejemplo: Símbolos = "abcdef", Frecuencias = [5, 9, 12, 13, 16, 45]}
+
+\textbf{Paso 1:} Identificar parámetros del problema
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Símbolo} & \textbf{Frecuencia} \\
+\hline
+a & 5 \\
+b & 9 \\
+c & 12 \\
+d & 13 \\
+e & 16 \\
+f & 45 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 2:} Inicialización del heap
+\begin{itemize}
+    \item Crear nodos hoja para cada símbolo
+    \item Heap inicial: [5(a), 9(b), 12(c), 13(d), 16(e), 45(f)]
+    \item Orden en heap: a(5), b(9), c(12), d(13), e(16), f(45)
+\end{itemize}
+
+\textbf{Paso 3:} Construcción del árbol - Iteración 1
+\begin{itemize}
+    \item Extraer: l = a(5), r = b(9)
+    \item Crear nodo interno: 5 + 9 = 14
+    \item Heap actualizado: [12(c), 13(d), 14(ab), 16(e), 45(f)]
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm, level 1/.style={sibling distance=2cm}]
+    \node {14}
+        child {node {a (5)}}
+        child {node {b (9)}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 4:} Construcción del árbol - Iteración 2
+\begin{itemize}
+    \item Extraer: l = c(12), r = d(13)
+    \item Crear nodo interno: 12 + 13 = 25
+    \item Heap actualizado: [14(ab), 16(e), 25(cd), 45(f)]
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm, level 1/.style={sibling distance=2cm}]
+    \node {25}
+        child {node {c (12)}}
+        child {node {d (13)}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 5:} Construcción del árbol - Iteración 3
+\begin{itemize}
+    \item Extraer: l = ab(14), r = e(16)
+    \item Crear nodo interno: 14 + 16 = 30
+    \item Heap actualizado: [25(cd), 30(abe), 45(f)]
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm, level 1/.style={sibling distance=3cm}, level 2/.style={sibling distance=1.5cm}]
+    \node {30}
+        child {
+            node {14}
+            child {node {a (5)}}
+            child {node {b (9)}}
+        }
+        child {node {e (16)}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 6:} Construcción del árbol - Iteración 4
+\begin{itemize}
+    \item Extraer: l = cd(25), r = abe(30)
+    \item Crear nodo interno: 25 + 30 = 55
+    \item Heap actualizado: [45(f), 55(abcde)]
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm, level 1/.style={sibling distance=4cm}, level 2/.style={sibling distance=2cm}, level 3/.style={sibling distance=1cm}]
+    \node {55}
+        child {
+            node {25}
+            child {node {c (12)}}
+            child {node {d (13)}}
+        }
+        child {
+            node {30}
+            child {
+                node {14}
+                child {node {a (5)}}
+                child {node {b (9)}}
+            }
+            child {node {e (16)}}
+        };
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 7:} Construcción del árbol - Iteración Final
+\begin{itemize}
+    \item Extraer: l = f(45), r = abcde(55)
+    \item Crear nodo raíz: 45 + 55 = 100
+    \item Heap: [] (vacío)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[level distance=1.5cm, level 1/.style={sibling distance=5cm}, level 2/.style={sibling distance=2.5cm}, level 3/.style={sibling distance=1.5cm}, level 4/.style={sibling distance=1cm}]
+    \node {100}
+        child {node {f (45)}}
+        child {
+            node {55}
+            child {
+                node {25}
+                child {node {c (12)}}
+                child {node {d (13)}}
+            }
+            child {
+                node {30}
+                child {
+                    node {14}
+                    child {node {a (5)}}
+                    child {node {b (9)}}
+                }
+                child {node {e (16)}}
+            }
+        };
+\end{tikzpicture}
+\end{center}
+
+\textbf{Paso 8:} Generación de códigos mediante recorrido preorden
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Símbolo} & \textbf{Camino} & \textbf{Código} \\
+\hline
+f & Raíz → Izquierda & 0 \\
+c & Raíz → Derecha → Izquierda → Izquierda & 100 \\
+d & Raíz → Derecha → Izquierda → Derecha & 101 \\
+a & Raíz → Derecha → Derecha → Izquierda → Izquierda & 1100 \\
+b & Raíz → Derecha → Derecha → Izquierda → Derecha & 1101 \\
+e & Raíz → Derecha → Derecha → Derecha & 111 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Resultado Final:}
+\begin{itemize}
+    \item f: 0
+    \item c: 100
+    \item d: 101
+    \item a: 1100
+    \item b: 1101
+    \item e: 111
+\end{itemize}
+
+\textbf{Paso 9:} Cálculo del costo total
+\begin{align}
+\text{Costo} &= 45 \cdot 1 + 12 \cdot 3 + 13 \cdot 3 + 5 \cdot 4 + 9 \cdot 4 + 16 \cdot 3 \\
+&= 45 + 36 + 39 + 20 + 36 + 48 \\
+&= 224
+\end{align}
+
+\section{Análisis del Algoritmo}
+
+\subsection{Optimalidad del Algoritmo de Huffman}
+%<*exp4>
+El algoritmo de Huffman garantiza encontrar la codificación óptima porque:
+
+\begin{itemize}
+    \item \textbf{Subestructura óptima:} El problema se puede dividir en subproblemas óptimos
+    \item \textbf{Propiedad de elección greedy:} La elección local óptima lleva a una solución global óptima
+    \item \textbf{Demostración:} Se puede demostrar que cualquier código óptimo puede transformarse en el código de Huffman sin aumentar el costo
+\end{itemize}
+
+\textbf{Comparación con fuerza bruta:}
+\begin{itemize}
+    \item Huffman: $O(n \log n)$ - Solución óptima en tiempo polinomial
+    \item Fuerza bruta: $O(C_{n-1} \cdot n! \cdot n)$ - Solución óptima en tiempo exponencial
+\end{itemize}
+%</exp4>
+
+\subsection{Ventajas del Algoritmo}
+%<*exp5>
+\begin{itemize}
+    \item \textbf{Eficiencia:} Complejidad $O(n \log n)$
+    \item \textbf{Optimalidad:} Garantiza la solución óptima
+    \item \textbf{Simplicidad:} Fácil de implementar
+    \item \textbf{Aplicabilidad:} Ampliamente usado en compresión de datos
+\end{itemize}
+%</exp5>
+
+\subsection{Análisis del Ejemplo}
+Para el ejemplo dado, el algoritmo produce:
+\begin{itemize}
+    \item \textbf{Longitudes de código:} [4, 4, 3, 3, 3, 1]
+    \item \textbf{Costo total:} 224 bits
+    \item \textbf{Eficiencia:} El símbolo más frecuente (f) tiene el código más corto (1 bit)
+    \item \textbf{Balance:} Los símbolos menos frecuentes tienen códigos más largos
+\end{itemize}
+
+\section{Conclusiones}
+
+El algoritmo greedy de Huffman es una solución elegante y eficiente al problema de codificación óptima. Su fortaleza radica en:
+
+\begin{itemize}
+    \item La demostración matemática de su optimalidad
+    \item Su complejidad polinomial $O(n \log n)$
+    \item Su amplia aplicación en sistemas de compresión de datos
+    \item La simplicidad de su implementación
+\end{itemize}
+
+Este algoritmo demuestra el poder de las estrategias greedy cuando se aplican correctamente a problemas que exhiben subestructura óptima y la propiedad de elección greedy. Es considerado uno de los algoritmos más importantes en el campo de la compresión de datos.
+
+\end{document}

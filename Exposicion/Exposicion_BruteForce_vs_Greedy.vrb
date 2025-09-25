@@ -1,0 +1,18 @@
+\frametitle{Pseudocódigo — Greedy}
+\begin{algorithm}[H]
+  \caption{Códigos de Huffman con Greedy}
+  \begin{algorithmic}[1]
+      \REQUIRE Símbolos y frecuencias
+      \ENSURE Códigos Huffman para cada símbolo
+
+      \STATE Crear min-heap con nodos hoja para cada símbolo
+      \WHILE{heap tiene más de un elemento}
+          \STATE $l \leftarrow$ extraer mínimo
+          \STATE $r \leftarrow$ extraer mínimo
+          \STATE Crear nodo interno con frecuencia $l.freq + r.freq$
+          \STATE Insertar nodo interno en heap
+      \ENDWHILE
+      \STATE Generar códigos mediante recorrido preorden
+      \RETURN códigos generados
+  \end{algorithmic}
+  \end{algorithm}

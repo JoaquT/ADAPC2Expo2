@@ -1,0 +1,226 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Pseudocódigo: Problema de Selección de Actividades con Algoritmo Greedy}
+\author{Algoritmo Greedy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Descripción del Problema}
+%<*enunciado>
+El problema de selección de actividades consiste en seleccionar el máximo número de actividades mutuamente compatibles de un conjunto dado. Cada actividad tiene un tiempo de inicio y un tiempo de finalización. Dos actividades son compatibles si no se solapan en el tiempo (la finalización de una es menor o igual al inicio de la otra). El objetivo es encontrar el subconjunto de máximo tamaño que no contenga actividades que se solapen.
+
+El algoritmo greedy resuelve este problema de manera óptima ordenando las actividades por su tiempo de finalización y seleccionando de manera greedy.
+%</enunciado>
+
+\section{Pseudocódigo}
+
+\begin{algorithm}
+\caption{Selección de Actividades con Algoritmo Greedy}
+\begin{algorithmic}[1]
+%<*codigo1a>
+\REQUIRE Arreglos $start$ y $finish$ de $n$ elementos con tiempos de inicio y finalización
+\ENSURE El número máximo de actividades mutuamente compatibles
+
+\STATE $activities \leftarrow$ crear lista de tuplas $(start[i], finish[i])$ para $i = 0$ a $n-1$
+\STATE Ordenar $activities$ por tiempo de finalización (segundo elemento de cada tupla)
+\STATE $count \leftarrow 1$ \COMMENT{Al menos una actividad puede realizarse}
+\STATE $j \leftarrow 0$ \COMMENT{Índice de la última actividad seleccionada}
+
+\FOR{$i = 1$ \TO $n-1$}
+    \IF{$activities[i].start > activities[j].finish$}
+        \STATE $count \leftarrow count + 1$
+        \STATE $j \leftarrow i$ \COMMENT{Actualizar última actividad seleccionada}
+    \ENDIF
+\ENDFOR
+\RETURN $count$
+%</codigo1a>
+\end{algorithmic}
+\end{algorithm}
+
+\section{Explicación del Algoritmo}
+
+\subsection{Estrategia Greedy}
+%<*exp1>
+El algoritmo greedy para el problema de selección de actividades utiliza la siguiente estrategia:
+
+\begin{itemize}
+    \item \textbf{Ordenamiento:} Ordena todas las actividades por su tiempo de finalización en orden creciente
+    \item \textbf{Selección Greedy:} Siempre selecciona la primera actividad que no se solape con la última actividad seleccionada
+    \item \textbf{Justificación:} Al seleccionar la actividad que termina primero, se maximiza el tiempo disponible para actividades futuras
+\end{itemize}
+
+La elección greedy es óptima porque:
+\begin{itemize}
+    \item Si existe una solución óptima que no incluye la actividad que termina primero, se puede reemplazar la primera actividad de esa solución por la que termina primero
+    \item Esto no empeora la solución y mantiene la optimalidad
+\end{itemize}
+%</exp1>
+
+\subsection{Subestructura Óptima}
+%<*exp2>
+Para el problema de selección de actividades, la subestructura óptima se cumple:
+
+Si $S$ es una solución óptima para el conjunto de actividades $A$, y $a_1$ es la actividad que termina primero en $A$, entonces:
+\begin{itemize}
+    \item $a_1$ debe estar en alguna solución óptima
+    \item El resto de la solución óptima debe ser óptima para el conjunto $A'$ de actividades que no se solapan con $a_1$
+\end{itemize}
+
+Esto se debe a que seleccionar $a_1$ no interfiere con las opciones futuras, sino que las maximiza.
+%</exp2>
+
+\subsection{Complejidad}
+%<*exp3>
+\begin{itemize}
+    \item \textbf{Tiempo:} $O(n \log n)$
+    \begin{itemize}
+        \item $O(n \log n)$ para ordenar las actividades por tiempo de finalización
+        \item $O(n)$ para recorrer las actividades y hacer las selecciones
+    \end{itemize}
+    \item \textbf{Espacio:} $O(n)$ para almacenar las actividades ordenadas
+\end{itemize}
+%</exp3>
+
+\section{Resolución Paso a Paso}
+
+\subsection{Ejemplo: start = [1, 3, 0, 5, 8, 5], finish = [2, 4, 6, 7, 9, 9]}
+
+\textbf{Paso 1:} Crear tuplas de actividades
+\begin{itemize}
+    \item Actividad 0: (1, 2)
+    \item Actividad 1: (3, 4) 
+    \item Actividad 2: (0, 6)
+    \item Actividad 3: (5, 7)
+    \item Actividad 4: (8, 9)
+    \item Actividad 5: (5, 9)
+\end{itemize}
+
+\textbf{Paso 2:} Ordenar por tiempo de finalización
+\begin{itemize}
+    \item Actividad 0: (1, 2) - termina en 2
+    \item Actividad 1: (3, 4) - termina en 4
+    \item Actividad 2: (0, 6) - termina en 6
+    \item Actividad 3: (5, 7) - termina en 7
+    \item Actividad 4: (8, 9) - termina en 9
+    \item Actividad 5: (5, 9) - termina en 9
+\end{itemize}
+
+\textbf{Paso 3:} Aplicar algoritmo greedy
+
+Inicialización:
+\begin{itemize}
+    \item $count = 1$ (siempre se puede hacer al menos una actividad)
+    \item $j = 0$ (primera actividad seleccionada: Actividad 0)
+\end{itemize}
+
+Iteraciones:
+\begin{itemize}
+    \item \textbf{i = 1:} Actividad 1 (3, 4)
+    \begin{itemize}
+        \item ¿$activities[1].start > activities[0].finish$?
+        \item ¿$3 > 2$? SÍ
+        \item Seleccionar Actividad 1
+        \item $count = 2$, $j = 1$
+    \end{itemize}
+    
+    \item \textbf{i = 2:} Actividad 2 (0, 6)
+    \begin{itemize}
+        \item ¿$activities[2].start > activities[1].finish$?
+        \item ¿$0 > 4$? NO
+        \item NO seleccionar Actividad 2 (se solapa)
+    \end{itemize}
+    
+    \item \textbf{i = 3:} Actividad 3 (5, 7)
+    \begin{itemize}
+        \item ¿$activities[3].start > activities[1].finish$?
+        \item ¿$5 > 4$? SÍ
+        \item Seleccionar Actividad 3
+        \item $count = 3$, $j = 3$
+    \end{itemize}
+    
+    \item \textbf{i = 4:} Actividad 4 (8, 9)
+    \begin{itemize}
+        \item ¿$activities[4].start > activities[3].finish$?
+        \item ¿$8 > 7$? SÍ
+        \item Seleccionar Actividad 4
+        \item $count = 4$, $j = 4$
+    \end{itemize}
+    
+    \item \textbf{i = 5:} Actividad 5 (5, 9)
+    \begin{itemize}
+        \item ¿$activities[5].start > activities[4].finish$?
+        \item ¿$5 > 9$? NO
+        \item NO seleccionar Actividad 5 (se solapa)
+    \end{itemize}
+\end{itemize}
+
+\textbf{Resultado Final:} Se pueden realizar 4 actividades: Actividad 0, Actividad 1, Actividad 3, y Actividad 4.
+
+\subsection{Visualización Temporal}
+\begin{verbatim}
+Tiempo: 0  1  2  3  4  5  6  7  8  9  10
+Act 0:     |--|                           [OK] Seleccionada
+Act 1:        |--|                        [OK] Seleccionada  
+Act 2:  |----------|                      [X] No seleccionada (se solapa)
+Act 3:           |--|                     [OK] Seleccionada
+Act 4:                |--|                [OK] Seleccionada
+Act 5:           |-------|                [X] No seleccionada (se solapa)
+
+Solución óptima: 4 actividades
+\end{verbatim}
+
+\section{Demostración de Optimalidad}
+
+\subsection{Teorema}
+%<*exp4>
+El algoritmo greedy para selección de actividades produce una solución óptima.
+
+\textbf{Demostración por contradicción:}
+
+Supongamos que el algoritmo greedy no produce una solución óptima. Sea $G$ la solución del algoritmo greedy y $O$ una solución óptima con $|O| > |G|$.
+
+Sea $a_i$ la primera actividad en $O$ que no está en $G$. Como el algoritmo greedy siempre selecciona la actividad que termina primero que no se solapa, y $a_i$ no está en $G$, debe ser que $a_i$ se solapa con alguna actividad en $G$ que termina antes que $a_i$.
+
+Pero esto es imposible porque $a_i$ es parte de $O$, que es una solución válida. Por lo tanto, $a_i$ no puede solaparse con actividades en $G$ que terminen antes.
+
+Esta contradicción demuestra que $|O| \leq |G|$, por lo que $G$ es óptima.
+%</exp4>
+
+\section{Comparación con Fuerza Bruta}
+
+\begin{itemize}
+    \item \textbf{Complejidad:}
+    \begin{itemize}
+        \item Greedy: $O(n \log n)$
+        \item Fuerza Bruta: $O(2^n \cdot n^2)$
+    \end{itemize}
+    \item \textbf{Ventajas del Greedy:}
+    \begin{itemize}
+        \item Mucho más eficiente para problemas grandes
+        \item Fácil de implementar
+        \item Produce solución óptima
+    \end{itemize}
+    \item \textbf{Cuándo usar cada uno:}
+    \begin{itemize}
+        \item Greedy: Para problemas reales y grandes
+        \item Fuerza Bruta: Para verificación y problemas pequeños
+    \end{itemize}
+\end{itemize}
+
+\section{Conclusiones}
+
+El algoritmo greedy para selección de actividades es una solución elegante y eficiente que produce resultados óptimos en tiempo $O(n \log n)$. Su fortaleza radica en la elección inteligente del criterio de ordenamiento (por tiempo de finalización) y la estrategia de selección greedy, que garantiza la optimalidad de la solución.
+
+Este algoritmo demuestra el poder de las estrategias greedy cuando se aplican correctamente a problemas que exhiben subestructura óptima y la propiedad de elección greedy.
+
+\end{document}

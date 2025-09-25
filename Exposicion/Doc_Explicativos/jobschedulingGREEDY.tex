@@ -1,0 +1,278 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\geometry{margin=1in}
+
+\title{Pseudocódigo: Programación de Trabajos con Algoritmo Greedy}
+\author{Algoritmo Greedy}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Descripción del Problema}
+%<*enunciado>
+El problema de programación de trabajos con deadline (Job Scheduling with Deadlines) consiste en seleccionar y programar un subconjunto de trabajos de manera que se maximice la ganancia total, respetando las restricciones de deadline. Cada trabajo tiene:
+\begin{itemize}
+    \item Un identificador único
+    \item Un deadline (tiempo límite para completar el trabajo)
+    \item Una ganancia asociada
+\end{itemize}
+
+El objetivo es encontrar la secuencia de trabajos que maximice la ganancia total, donde cada trabajo debe completarse antes de su deadline y cada trabajo toma exactamente una unidad de tiempo.
+
+El algoritmo greedy resuelve este problema ordenando los trabajos por ganancia descendente y asignando cada trabajo al slot más tardío posible dentro de su deadline.
+%</enunciado>
+
+\section{Pseudocódigo}
+
+\begin{algorithm}
+\caption{Programación de Trabajos con Algoritmo Greedy}
+\begin{algorithmic}[1]
+%<*codigo1a>
+\REQUIRE Lista de trabajos $jobs$ donde cada trabajo tiene $(id, deadline, profit)$
+\ENSURE Lista de trabajos seleccionados y ganancia total
+
+\STATE Ordenar $jobs$ por ganancia en orden descendente
+\STATE $max\_deadline \leftarrow \max\{job.deadline \text{ para todo } job \text{ en } jobs\}$
+\STATE $slots \leftarrow$ arreglo de tamaño $max\_deadline + 1$ inicializado en $-1$
+\STATE $total\_profit \leftarrow 0$
+\STATE $scheduled\_jobs \leftarrow$ lista vacía
+
+\FOR{cada $job$ en $jobs$ (ordenados por ganancia descendente)}
+    \FOR{$t = job.deadline$ \DOWNTO $1$}
+        \IF{$slots[t] = -1$}
+            \STATE $slots[t] \leftarrow job.id$
+            \STATE $total\_profit \leftarrow total\_profit + job.profit$
+            \STATE $scheduled\_jobs.append(job.id)$
+            \STATE \textbf{break}
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\RETURN $scheduled\_jobs, total\_profit$
+%</codigo1a>
+\end{algorithmic}
+\end{algorithm}
+
+\section{Explicación del Algoritmo}
+
+\subsection{Estrategia Greedy}
+%<*exp1>
+El algoritmo greedy para programación de trabajos utiliza la siguiente estrategia:
+
+\begin{itemize}
+    \item \textbf{Ordenamiento por ganancia:} Se ordenan los trabajos en orden descendente de ganancia
+    \item \textbf{Asignación tardía:} Para cada trabajo, se busca el slot más tardío disponible dentro de su deadline
+    \item \textbf{Justificación:} Al asignar trabajos de alta ganancia primero y al slot más tardío posible, se maximiza la flexibilidad para trabajos posteriores
+\end{itemize}
+
+La elección greedy de procesar trabajos por ganancia descendente es una heurística que, aunque no garantiza optimalidad en todos los casos, tiende a producir buenas soluciones en la práctica.
+%</exp1>
+
+\subsection{Subestructura Óptima}
+%<*exp2>
+El problema de programación de trabajos exhibe subestructura óptima:
+
+Si $S$ es una solución óptima para el conjunto de trabajos $J$, y $j$ es el trabajo con mayor ganancia en $S$, entonces:
+\begin{itemize}
+    \item $S - \{j\}$ debe ser una solución óptima para $J - \{j\}$ con el slot ocupado por $j$ liberado
+    \item Esto permite construir la solución óptima de manera incremental
+\end{itemize}
+
+Sin embargo, el algoritmo greedy no siempre encuentra la solución óptima debido a la dependencia del orden de procesamiento.
+%</exp2>
+
+\subsection{Complejidad}
+%<*exp3>
+\begin{itemize}
+    \item \textbf{Tiempo:} $O(n \log n + n \cdot d)$
+    \begin{itemize}
+        \item $O(n \log n)$ para ordenar los trabajos por ganancia
+        \item $O(n \cdot d)$ para asignar trabajos, donde $d$ es el deadline máximo
+    \end{itemize}
+    \item \textbf{Espacio:} $O(d)$ para almacenar los slots, donde $d$ es el deadline máximo
+\end{itemize}
+
+La complejidad es eficiente para problemas prácticos donde el deadline máximo no es muy grande.
+%</exp3>
+
+\section{Resolución Paso a Paso}
+
+\subsection{Ejemplo: Trabajos = [A(2,100), B(1,19), C(2,27), D(1,25), E(3,15)]}
+
+\textbf{Trabajos de entrada:}
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Deadline} & \textbf{Ganancia} \\
+\hline
+A & 2 & 100 \\
+B & 1 & 19 \\
+C & 2 & 27 \\
+D & 1 & 25 \\
+E & 3 & 15 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 1:} Ordenar trabajos por ganancia descendente
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{ID} & \textbf{Deadline} & \textbf{Ganancia} \\
+\hline
+A & 2 & 100 \\
+C & 2 & 27 \\
+D & 1 & 25 \\
+B & 1 & 19 \\
+E & 3 & 15 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Paso 2:} Inicialización
+\begin{itemize}
+    \item $max\_deadline = \max\{2, 1, 2, 1, 3\} = 3$
+    \item $slots = [-1, -1, -1, -1]$ (índices 0, 1, 2, 3)
+    \item $total\_profit = 0$
+    \item $scheduled\_jobs = []$
+\end{itemize}
+
+\textbf{Paso 3:} Procesar trabajos en orden de ganancia
+
+\textbf{Trabajo A (ganancia = 100, deadline = 2):}
+\begin{itemize}
+    \item Buscar slot desde $t = 2$ hacia atrás hasta $t = 1$
+    \item $slots[2] = -1$ (disponible)
+    \item Asignar: $slots[2] = A$, $total\_profit = 100$, $scheduled\_jobs = [A]$
+    \item Estado: $slots = [-1, -1, A, -1]$
+\end{itemize}
+
+\textbf{Trabajo C (ganancia = 27, deadline = 2):}
+\begin{itemize}
+    \item Buscar slot desde $t = 2$ hacia atrás hasta $t = 1$
+    \item $slots[2] = A$ (ocupado)
+    \item $slots[1] = -1$ (disponible)
+    \item Asignar: $slots[1] = C$, $total\_profit = 127$, $scheduled\_jobs = [A, C]$
+    \item Estado: $slots = [-1, C, A, -1]$
+\end{itemize}
+
+\textbf{Trabajo D (ganancia = 25, deadline = 1):}
+\begin{itemize}
+    \item Buscar slot desde $t = 1$ hacia atrás
+    \item $slots[1] = C$ (ocupado)
+    \item No hay slots disponibles dentro del deadline
+    \item \textbf{NO se puede asignar}
+    \item Estado: $slots = [-1, C, A, -1]$ (sin cambios)
+\end{itemize}
+
+\textbf{Trabajo B (ganancia = 19, deadline = 1):}
+\begin{itemize}
+    \item Buscar slot desde $t = 1$ hacia atrás
+    \item $slots[1] = C$ (ocupado)
+    \item No hay slots disponibles dentro del deadline
+    \item \textbf{NO se puede asignar}
+    \item Estado: $slots = [-1, C, A, -1]$ (sin cambios)
+\end{itemize}
+
+\textbf{Trabajo E (ganancia = 15, deadline = 3):}
+\begin{itemize}
+    \item Buscar slot desde $t = 3$ hacia atrás hasta $t = 1$
+    \item $slots[3] = -1$ (disponible)
+    \item Asignar: $slots[3] = E$, $total\_profit = 142$, $scheduled\_jobs = [A, C, E]$
+    \item Estado: $slots = [-1, C, A, E]$
+\end{itemize}
+
+\textbf{Resultado Final:}
+\begin{itemize}
+    \item \textbf{Trabajos seleccionados:} [A, C, E]
+    \item \textbf{Ganancia total:} 142
+    \item \textbf{Programación:} 
+    \begin{itemize}
+        \item Tiempo 1: Trabajo C (deadline=2, ganancia=27)
+        \item Tiempo 2: Trabajo A (deadline=2, ganancia=100)
+        \item Tiempo 3: Trabajo E (deadline=3, ganancia=15)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Visualización de la Programación}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Tiempo} & \textbf{Trabajo} & \textbf{Deadline} & \textbf{Ganancia} \\
+\hline
+1 & C & 2 & 27 \\
+2 & A & 2 & 100 \\
+3 & E & 3 & 15 \\
+\hline
+\textbf{Total} & & & \textbf{142} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Análisis de la Solución}
+\begin{itemize}
+    \item \textbf{Trabajos rechazados:} D y B (ambos con deadline=1)
+    \item \textbf{Razón del rechazo:} El slot 1 ya está ocupado por C
+    \item \textbf{Decisión greedy:} Se priorizó C (ganancia=27) sobre D (ganancia=25) y B (ganancia=19)
+    \item \textbf{Eficiencia:} Se maximizó la ganancia total respetando las restricciones de deadline
+\end{itemize}
+
+\section{Análisis del Algoritmo}
+
+\subsection{Ventajas del Algoritmo Greedy}
+%<*exp4>
+\begin{itemize}
+    \item \textbf{Eficiencia:} Complejidad $O(n \log n + n \cdot d)$
+    \item \textbf{Simplicidad:} Fácil de implementar y entender
+    \item \textbf{Práctico:} Funciona bien en la mayoría de casos reales
+    \item \textbf{Rápido:} Tiempo polinomial
+\end{itemize}
+%</exp4>
+
+\subsection{Limitaciones}
+%<*exp5>
+\begin{itemize}
+    \item \textbf{No optimalidad:} No garantiza encontrar la solución óptima en todos los casos
+    \item \textbf{Dependencia del orden:} El resultado puede variar según el orden de trabajos con igual ganancia
+    \item \textbf{Casos patológicos:} Puede fallar en configuraciones específicas de deadlines y ganancias
+\end{itemize}
+
+\textbf{Ejemplo de no optimalidad:}
+Para trabajos con deadlines muy restrictivos, el algoritmo greedy puede rechazar trabajos de alta ganancia que podrían incluirse en una solución óptima.
+%</exp5>
+
+\subsection{Comparación con Fuerza Bruta}
+\begin{itemize}
+    \item \textbf{Complejidad:}
+    \begin{itemize}
+        \item Greedy: $O(n \log n + n \cdot d)$
+        \item Fuerza Bruta: $O(n! \cdot n)$
+    \end{itemize}
+    \item \textbf{Ventajas del Greedy:}
+    \begin{itemize}
+        \item Mucho más eficiente para problemas grandes
+        \item Tiempo polinomial vs. factorial
+        \item Práctico para aplicaciones reales
+    \end{itemize}
+    \item \textbf{Desventajas:}
+    \begin{itemize}
+        \item No garantiza optimalidad
+        \item Puede producir soluciones subóptimas
+    \end{itemize}
+\end{itemize}
+
+\section{Conclusiones}
+
+El algoritmo greedy para programación de trabajos es una solución eficiente y práctica que produce buenos resultados en la mayoría de casos. Aunque no garantiza optimalidad, su simplicidad y eficiencia lo hacen adecuado para muchas aplicaciones prácticas donde se requiere una solución razonable rápidamente.
+
+Para casos donde se necesita garantizar la solución óptima, se requieren algoritmos más sofisticados como programación dinámica o técnicas de optimización, pero el algoritmo greedy proporciona una excelente base y punto de partida para el análisis de problemas de programación de trabajos.
+
+\end{document}

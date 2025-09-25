@@ -1,0 +1,181 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Pseudocódigo: Problema de Selección de Actividades con Fuerza Bruta}
+\author{Algoritmo de Fuerza Bruta}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\section{Descripción del Problema}
+%<*enunciado>
+El problema de selección de actividades consiste en seleccionar el máximo número de actividades mutuamente compatibles de un conjunto dado. Cada actividad tiene un tiempo de inicio y un tiempo de finalización. Dos actividades son compatibles si no se solapan en el tiempo (la finalización de una es menor o igual al inicio de la otra). El objetivo es encontrar el subconjunto de máximo tamaño que no contenga actividades que se solapen.
+%</enunciado>
+
+\section{Pseudocódigo}
+
+\begin{algorithm}
+\caption{Selección de Actividades con Fuerza Bruta}
+\begin{algorithmic}[1]
+%<*codigo1a>
+\REQUIRE Un arreglo $activities$ de $n$ elementos donde cada elemento es una tupla $(start, end)$
+\ENSURE El subconjunto de máximo tamaño de actividades mutuamente compatibles
+
+\STATE $n \leftarrow$ longitud de $activities$
+\STATE $best \leftarrow$ lista vacía
+
+\COMMENT{Probar todos los subconjuntos posibles}
+\FOR{$r = 1$ \textbf{to} $n$}
+    \FOR{cada $subset$ en $combinations(activities, r)$}
+        \IF{$is\_valid(subset)$ $\land$ $|subset| > |best|$}
+            \STATE $best \leftarrow subset$
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\RETURN $best$
+%</codigo1a>
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Función de Validación}
+\begin{algorithmic}[1]
+%<*codigo1b>
+\REQUIRE Un subconjunto $schedule$ de actividades
+\ENSURE Verdadero si las actividades no se solapan, Falso en caso contrario
+
+\FOR{$i = 0$ \textbf{to} $|schedule|-1$}
+    \FOR{$j = i + 1$ \textbf{to} $|schedule|-1$}
+        \IF{$\neg\big( (schedule[i].end \\leq schedule[j].start) \\\lor (schedule[j].end \\leq schedule[i].start) \big)$}
+            \RETURN false
+        \ENDIF
+    \ENDFOR
+\ENDFOR
+\RETURN true
+%</codigo1b>
+\end{algorithmic}
+\end{algorithm}
+
+\section{Explicación del Algoritmo}
+
+\subsection{Enfoque de Fuerza Bruta}
+%<*exp1>
+El algoritmo de fuerza bruta para el problema de selección de actividades funciona de la siguiente manera:
+
+\begin{itemize}
+    \item \textbf{Generación de subconjuntos:} Se generan todos los posibles subconjuntos de actividades usando la función $combinations$
+    \item \textbf{Validación:} Para cada subconjunto generado, se verifica si las actividades son mutuamente compatibles
+    \item \textbf{Optimización:} Se mantiene el mejor subconjunto encontrado hasta el momento
+\end{itemize}
+
+La validación de compatibilidad se basa en que dos actividades $(start_i, end_i)$ y $(start_j, end_j)$ son compatibles si:
+$$end_i \leq start_j \text{ o } end_j \leq start_i$$
+%</exp1>
+
+\subsection{Complejidad}
+%<*exp2>
+\begin{itemize}
+    \item \textbf{Tiempo:} $O(2^n \cdot n^2)$
+    \begin{itemize}
+        \item $O(2^n)$ para generar todos los subconjuntos posibles
+        \item $O(n^2)$ para validar cada subconjunto (verificar solapamientos)
+    \end{itemize}
+    \item \textbf{Espacio:} $O(n)$ para almacenar el mejor subconjunto encontrado
+\end{itemize}
+%</exp2>
+
+\section{Resolución Paso a Paso}
+
+\subsection{Ejemplo: Actividades = [(1, 3), (2, 5), (4, 6)]}
+
+\textbf{Paso 1:} Identificar todas las actividades
+\begin{itemize}
+    \item Actividad A: (1, 3) - inicia en 1, termina en 3
+    \item Actividad B: (2, 5) - inicia en 2, termina en 5  
+    \item Actividad C: (4, 6) - inicia en 4, termina en 6
+\end{itemize}
+
+\textbf{Paso 2:} Generar todos los subconjuntos de tamaño 1
+\begin{itemize}
+    \item \{A\} = \{(1, 3)\} - Válido (1 actividad)
+    \item \{B\} = \{(2, 5)\} - Válido (1 actividad)
+    \item \{C\} = \{(4, 6)\} - Válido (1 actividad)
+\end{itemize}
+Mejor hasta ahora: cualquier subconjunto de tamaño 1
+
+\textbf{Paso 3:} Generar todos los subconjuntos de tamaño 2
+\begin{itemize}
+    \item \{A, B\} = \{(1, 3), (2, 5)\}
+    \begin{itemize}
+        \item ¿A y B se solapan? A termina en 3, B inicia en 2
+        \item Como 3 > 2, se solapan. NO es válido.
+    \end{itemize}
+    \item \{A, C\} = \{(1, 3), (4, 6)\}
+    \begin{itemize}
+        \item ¿A y C se solapan? A termina en 3, C inicia en 4
+        \item Como $3 \le 4$, NO se solapan. ES válido.
+    \end{itemize}
+    \item \{B, C\} = \{(2, 5), (4, 6)\}
+    \begin{itemize}
+        \item ¿B y C se solapan? B termina en 5, C inicia en 4
+        \item Como 5 > 4, se solapan. NO es válido.
+    \end{itemize}
+\end{itemize}
+Mejor hasta ahora: \{A, C\} = \{(1, 3), (4, 6)\} (tamaño 2)
+
+\textbf{Paso 4:} Generar subconjunto de tamaño 3
+\begin{itemize}
+    \item \{A, B, C\} = \{(1, 3), (2, 5), (4, 6)\}
+    \begin{itemize}
+        \item Verificar solapamientos:
+        \begin{itemize}
+            \item A y B: $3 > 2$ $\Rightarrow$ Se solapan
+            \item A y C: $3 \le 4$ $\Rightarrow$ NO se solapan
+            \item B y C: $5 > 4$ $\Rightarrow$ Se solapan
+        \end{itemize}
+        \item Como hay al menos un solapamiento, NO es válido.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Resultado Final:} El subconjunto óptimo es \{A, C\} = \{(1, 3), (4, 6)\} con 2 actividades.
+
+\subsection{Visualización Temporal}
+\begin{verbatim}
+Tiempo: 0  1  2  3  4  5  6  7
+A:      |-----|
+B:         |--------|
+C:            |-----|
+
+Solución óptima: A y C (no se solapan)
+\end{verbatim}
+
+\section{Análisis de Complejidad}
+
+\subsection{Comparación con Algoritmo Greedy}
+%<*exp3>
+\begin{itemize}
+    \item \textbf{Fuerza Bruta:} $O(2^n \cdot n^2)$ - Encuentra la solución óptima pero es exponencial
+    \item \textbf{Algoritmo Greedy:} $O(n \log n)$ - Solución óptima cuando se ordena por tiempo de finalización
+\end{itemize}
+
+El algoritmo de fuerza bruta es útil para:
+\begin{itemize}
+    \item Verificar la corrección de algoritmos más eficientes
+    \item Problemas pequeños donde la complejidad exponencial es manejable
+    \item Casos donde se necesitan múltiples criterios de optimización
+\end{itemize}
+%</exp3>
+
+\section{Conclusiones}
+
+El algoritmo de fuerza bruta para el problema de selección de actividades garantiza encontrar la solución óptima pero tiene una complejidad exponencial. Es apropiado para casos de estudio y verificación, pero para problemas reales se recomienda usar el algoritmo greedy que tiene complejidad $O(n \log n)$ y produce resultados óptimos cuando se ordena por tiempo de finalización.
+
+\end{document}

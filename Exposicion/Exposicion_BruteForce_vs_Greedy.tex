@@ -1,0 +1,579 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% ====== Language & encoding ======
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{catchfilebetweentags}
+
+% ====== Useful packages for later editing ======
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath, amssymb}
+\usepackage{array}
+\usepackage{listings}   % For code (adjust language later)
+\usepackage{algorithm}{}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{float} 
+\usepackage{tikz}
+\usepackage{forest}
+
+% Código
+\usepackage{listingsutf8} % <- habilita UTF-8 en listings
+\lstset{
+  inputencoding=utf8,
+  extendedchars=true,         % inofensivo; ayuda en algunas distros
+  columns=fullflexible,
+  breaklines=true,
+  showstringspaces=false,
+}
+
+% Paleta de colores (fondo negro y acentos legibles)
+\definecolor{codebg}{RGB}{0,0,0}        % negro
+\definecolor{c-linenum}{RGB}{120,120,120}
+\definecolor{c-key}{RGB}{97,175,239}    % azul (keywords)
+\definecolor{c-str}{RGB}{152,195,121}   % verde (strings)
+\definecolor{c-com}{RGB}{92,99,112}     % gris (comentarios)
+\definecolor{c-id}{RGB}{224,108,117}    % rojo-suave (identificadores/emphasis)
+\definecolor{c-builtin}{RGB}{198,120,221}% lila (builtins)
+\definecolor{c-num}{RGB}{209,154,102}   % naranja (números)
+
+% Mapeo de tildes/ñ/¿/¡ para listings
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'\i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1
+  {¿}{{\textquestiondown}}1 {¡}{{\textexclamdown}}1
+}
+
+\renewcommand{\thealgorithm}{} % quita numeración
+\makeatletter
+\newcommand{\REQUIRE}{\Require}
+\newcommand{\ENSURE}{\Ensure}
+\newcommand{\STATE}{\State} 
+\newcommand{\TO}{\text{ to }}
+\newcommand{\IF}{\If}\newcommand{\ELSE}{\Else}\newcommand{\ELSIF}{\ElsIf}\newcommand{\ENDIF}{\EndIf}
+\newcommand{\FOR}{\For}\newcommand{\ENDFOR}{\EndFor}
+\newcommand{\WHILE}{\While}\newcommand{\ENDWHILE}{\EndWhile}
+\newcommand{\REPEAT}{\Repeat}\newcommand{\UNTIL}{\Until}
+\newcommand{\RETURN}{\State \Return}
+\newcommand{\COMMENT}[1]{\Comment{#1}}
+\makeatother
+
+% ====== Listings style ======
+\lstdefinestyle{mystyle}{
+  basicstyle=\ttfamily\scriptsize,
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=6pt,
+  frame=single,
+  showstringspaces=false,
+  columns=fullflexible,
+  keepspaces=true,
+  breaklines=true,
+  tabsize=2,
+  backgroundcolor=\color{gray!10}
+}
+\lstset{style=mystyle}
+
+% Estilo oscuro para Python
+\lstdefinestyle{pyDark}{
+  language=Python,
+  inputencoding=utf8,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\footnotesize\color{white},
+  keywordstyle=\color{c-key}\bfseries,
+  stringstyle=\color{c-str},
+  commentstyle=\itshape\color{c-com},
+  numberstyle=\tiny\color{c-linenum},
+  numbers=left,
+  stepnumber=1,
+  numbersep=8pt,
+  showstringspaces=false,
+  upquote=true,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=fullflexible,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{c-com},
+  tabsize=4,
+  emph={self,True,False,None},
+  emphstyle=\color{c-builtin},
+  alsoletter={.},
+  morekeywords=[2]{int,float,str,list,dict,set,range,zip,enumerate,len,print,max,min,sum,sorted,any,all},
+  keywordstyle=[2]\color{c-builtin},
+}
+
+% ====== Algorithm style ======
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Salida:}}
+
+% ====== Title data ======
+\title[Fuerza Bruta vs Greedy]{Exposición: Algoritmos de Fuerza Bruta vs Greedy}
+\subtitle{Análisis Comparativo de Estrategias Algorítmicas}
+\author[Delgado, G. \and Torres, J.]{Delgado Romero, Gustavo \and Torres Reategui, Joaquin}
+\institute[UNI]{Universidad Nacional de Ingeniería \\ CC371 - Análisis y Diseño de Algoritmos}
+\date{\today}
+
+\begin{document}
+
+% ====== Title ======
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% ====== Agenda ======
+\begin{frame}{Tabla de Contenidos}
+  \tableofcontents[hideallsubsections]
+\end{frame}
+
+% ====== Resumen de Problemas ======
+\begin{frame}{Resumen de Problemas}
+  \begin{block}{Problemas a Comparar}
+    \begin{enumerate}
+      \item \textbf{Activity Selection Problem} - Selección de actividades compatibles
+      \item \textbf{Graph Coloring} - Coloreo de grafos con restricciones
+      \item \textbf{Job Scheduling} - Programación de trabajos con deadlines
+      \item \textbf{Huffman Codes} - Codificación óptima de símbolos
+    \end{enumerate}
+  \end{block}
+  
+  \vspace{1em}
+  \small {\color{gray}Compararemos las implementaciones de fuerza bruta y greedy para cada problema.}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 1: Activity Selection Problem
+% =======================================================
+\section{Problema 1: Activity Selection Problem}
+\begin{frame}{Tabla de Contenidos}
+    \tableofcontents[
+      currentsection,
+      hideothersubsections
+    ]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Enunciado — Activity Selection}
+  \begin{block}{Enunciado}
+    El problema de selección de actividades consiste en seleccionar el máximo número de actividades mutuamente compatibles de un conjunto dado. Cada actividad tiene un tiempo de inicio y un tiempo de finalización. Dos actividades son compatibles si no se solapan en el tiempo.
+  \end{block}
+  
+  \begin{block}{Objetivo}
+    Encontrar el subconjunto de máximo tamaño que no contenga actividades que se solapen.
+  \end{block}
+\end{frame}
+
+\subsection{Fuerza Bruta}
+\begin{frame}[fragile]{Pseudocódigo — Fuerza Bruta}
+  \begin{algorithm}[H]
+  \caption{Selección de Actividades con Fuerza Bruta}
+  \begin{algorithmic}[1]
+      \REQUIRE Lista de actividades con tiempos de inicio y finalización
+      \ENSURE Subconjunto de máximo tamaño de actividades compatibles
+      
+      \STATE $n \leftarrow$ longitud de actividades
+      \STATE $best \leftarrow$ lista vacía
+      
+      \FOR{$r = 1$ \TO $n$}
+          \FOR{cada subconjunto de tamaño $r$ en combinaciones de actividades}
+              \IF{subconjunto es válido y $|subconjunto| > |best|$}
+                  \STATE $best \leftarrow$ subconjunto
+              \ENDIF
+          \ENDFOR
+      \ENDFOR
+      \RETURN $best$
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\begin{frame}[fragile]{Pseudocódigo — Validación}
+  \begin{algorithm}[H]
+  \caption{Función de Validación}
+  \begin{algorithmic}[1]
+      \REQUIRE Subconjunto de actividades
+      \ENSURE Verdadero si no hay solapamientos
+      
+      \FOR{cada par de actividades $(i, j)$ en el subconjunto}
+          \IF{actividades $i$ y $j$ se solapan}
+              \RETURN \textbf{false}
+          \ENDIF
+      \ENDFOR
+      \RETURN \textbf{true}
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Algoritmo Greedy}
+\begin{frame}[fragile]{Pseudocódigo — Greedy}
+  \begin{algorithm}[H]
+  \caption{Selección de Actividades con Greedy}
+  \begin{algorithmic}[1]
+      \REQUIRE Lista de actividades con tiempos de inicio y finalización
+      \ENSURE Número máximo de actividades compatibles
+      
+      \STATE Ordenar actividades por tiempo de finalización
+      \STATE $count \leftarrow 1$
+      \STATE $j \leftarrow 0$ \COMMENT{Última actividad seleccionada}
+      
+      \FOR{$i = 1$ \TO $n-1$}
+          \IF{actividad $i$ no se solapa con actividad $j$}
+              \STATE $count \leftarrow count + 1$
+              \STATE $j \leftarrow i$
+          \ENDIF
+      \ENDFOR
+      \RETURN $count$
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Código}
+\begin{frame}{Código — Fuerza Bruta}
+  %\lstinputlisting[language=Python, firstline=1, lastline=25,style=pyDark]{pc3/activityselectionproblemBRUTEFORCE.py}
+\end{frame}
+
+\begin{frame}{Código — Greedy}
+  %\lstinputlisting[language=Python, firstline=1, lastline=36,style=pyDark]{pc3/activityselectionproblemGREEDY.py}
+\end{frame}
+
+\subsection{Comparación}
+\begin{frame}{Comparación — Activity Selection}
+  \begin{table}[h]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+  \textbf{Aspecto} & \textbf{Fuerza Bruta} & \textbf{Greedy} \\
+  \hline
+  \textbf{Complejidad Temporal} & $O(2^n \cdot n^2)$ & $O(n \log n)$ \\
+  \textbf{Complejidad Espacial} & $O(n)$ & $O(n)$ \\
+  \textbf{Optimalidad} & Garantizada & Garantizada \\
+  \textbf{Implementación} & Compleja & Simple \\
+  \textbf{Escalabilidad} & Limitada & Excelente \\
+  \hline
+  \textbf{Ventajas} & Solución óptima garantizada & Eficiente y óptimo \\
+  \textbf{Desventajas} & Exponencial, lento & Depende del orden \\
+  \hline
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 2: Graph Coloring
+% =======================================================
+\section{Problema 2: Graph Coloring}
+\begin{frame}{Tabla de Contenidos}
+    \tableofcontents[
+      currentsection,
+      hideothersubsections
+    ]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Enunciado — Graph Coloring}
+  \begin{block}{Enunciado}
+    El problema de coloreo de grafos consiste en asignar colores a los vértices de un grafo de manera que ningún par de vértices adyacentes compartan el mismo color. El objetivo es encontrar una coloración válida usando el menor número posible de colores.
+  \end{block}
+\end{frame}
+
+\subsection{Fuerza Bruta}
+\begin{frame}[fragile]{Pseudocódigo — Fuerza Bruta}
+  \begin{algorithm}[H]
+  \caption{Coloreo de Grafos con Fuerza Bruta}
+  \begin{algorithmic}[1]
+      \REQUIRE Grafo $G$ y número de colores $k$
+      \ENSURE Asignación válida de colores o null
+      
+      \STATE $n \leftarrow$ número de vértices
+      \FOR{cada asignación en producto cartesiano de $k$ colores}
+          \IF{asignación es válida}
+              \RETURN asignación
+          \ENDIF
+      \ENDFOR
+      \RETURN \textbf{null}
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Algoritmo Greedy}
+\begin{frame}[fragile]{Pseudocódigo — Greedy}
+  \begin{algorithm}[H]
+  \caption{Coloreo de Grafos con Greedy}
+  \begin{algorithmic}[1]
+      \REQUIRE Grafo $G$ con $V$ vértices
+      \ENSURE Asignación de colores para todos los vértices
+      
+      \STATE $result[0] \leftarrow 0$ \COMMENT{Primer color al primer vértice}
+      \STATE $available \leftarrow$ arreglo de $V$ elementos en false
+      
+      \FOR{$u = 1$ \TO $V-1$}
+          \FOR{cada vértice adyacente $i$ a $u$}
+              \IF{$result[i] \neq -1$}
+                  \STATE $available[result[i]] \leftarrow$ true
+              \ENDIF
+          \ENDFOR
+          
+          \STATE $cr \leftarrow$ primer color disponible
+          \STATE $result[u] \leftarrow cr$
+          \STATE Resetear $available$ para siguiente iteración
+      \ENDFOR
+      \RETURN $result$
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Código}
+\begin{frame}{Código — Fuerza Bruta}
+  %\lstinputlisting[language=Python, firstline=1, lastline=35,style=pyDark]{pc3/brute_force_coloring.py}
+\end{frame}
+
+\begin{frame}{Código — Greedy}
+  %\lstinputlisting[language=Python, firstline=1, lastline=40,style=pyDark]{pc3/graphcoloringGREEDY.py}
+\end{frame}
+
+\subsection{Comparación}
+\begin{frame}{Comparación — Graph Coloring}
+  \begin{table}[h]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+  \textbf{Aspecto} & \textbf{Fuerza Bruta} & \textbf{Greedy} \\
+  \hline
+  \textbf{Complejidad Temporal} & $O(k^n \cdot n \cdot m)$ & $O(V^2 + E)$ \\
+  \textbf{Complejidad Espacial} & $O(n)$ & $O(n)$ \\
+  \textbf{Optimalidad} & Garantizada & No garantizada \\
+  \textbf{Implementación} & Compleja & Simple \\
+  \textbf{Escalabilidad} & Muy limitada & Buena \\
+  \hline
+  \textbf{Ventajas} & Solución óptima & Eficiente, práctico \\
+  \textbf{Desventajas} & Exponencial, lento & Puede usar más colores \\
+  \hline
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 3: Job Scheduling
+% =======================================================
+\section{Problema 3: Job Scheduling}
+\begin{frame}{Tabla de Contenidos}
+    \tableofcontents[
+      currentsection,
+      hideothersubsections
+    ]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Enunciado — Job Scheduling}
+  \begin{block}{Enunciado}
+    El problema de programación de trabajos con deadline consiste en seleccionar y programar un subconjunto de trabajos de manera que se maximice la ganancia total, respetando las restricciones de deadline. Cada trabajo tiene un deadline y una ganancia asociada.
+  \end{block}
+\end{frame}
+
+\subsection{Fuerza Bruta}
+\begin{frame}[fragile]{Pseudocódigo — Fuerza Bruta}
+  \begin{algorithm}[H]
+  \caption{Programación de Trabajos con Fuerza Bruta}
+  \begin{algorithmic}[1]
+      \REQUIRE Lista de trabajos con deadline y ganancia
+      \ENSURE Mejor programación y ganancia máxima
+      
+      \STATE $best\_profit \leftarrow 0$
+      \STATE $best\_schedule \leftarrow$ lista vacía
+      
+      \FOR{cada permutación de trabajos}
+          \STATE $time \leftarrow 0$, $profit \leftarrow 0$
+          \FOR{cada trabajo en la permutación}
+              \IF{$time < trabajo.deadline$}
+                  \STATE Incluir trabajo, actualizar ganancia y tiempo
+              \ENDIF
+          \ENDFOR
+          \IF{$profit > best\_profit$}
+              \STATE Actualizar mejor solución
+          \ENDIF
+      \ENDFOR
+      \RETURN $best\_schedule, best\_profit$
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Algoritmo Greedy}
+\begin{frame}[fragile]{Pseudocódigo — Greedy}
+  \begin{algorithm}[H]
+  \caption{Programación de Trabajos con Greedy}
+  \begin{algorithmic}[1]
+      \REQUIRE Lista de trabajos con deadline y ganancia
+      \ENSURE Trabajos seleccionados y ganancia total
+      
+      \STATE Ordenar trabajos por ganancia descendente
+      \STATE $max\_deadline \leftarrow$ deadline máximo
+      \STATE $slots \leftarrow$ arreglo de slots inicializado en -1
+      
+      \FOR{cada trabajo en orden de ganancia}
+          \FOR{$t = trabajo.deadline$ \DOWNTO $1$}
+              \IF{$slots[t] = -1$}
+                  \STATE Asignar trabajo al slot $t$
+                  \STATE Actualizar ganancia total
+                  \STATE \textbf{break}
+              \ENDIF
+          \ENDFOR
+      \ENDFOR
+      \RETURN trabajos seleccionados, ganancia total
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Código}
+\begin{frame}{Código — Fuerza Bruta}
+  %\lstinputlisting[language=Python, firstline=1, lastline=24,style=pyDark]{pc3/brute_force_job_scheduling.py}
+\end{frame}
+
+\begin{frame}{Código — Greedy}
+  %\lstinputlisting[language=Python, firstline=1, lastline=46,style=pyDark]{pc3/jobschedulingGREEDY.py}
+\end{frame}
+
+\subsection{Comparación}
+\begin{frame}{Comparación — Job Scheduling}
+  \begin{table}[h]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+  \textbf{Aspecto} & \textbf{Fuerza Bruta} & \textbf{Greedy} \\
+  \hline
+  \textbf{Complejidad Temporal} & $O(n! \cdot n)$ & $O(n \log n + n \cdot d)$ \\
+  \textbf{Complejidad Espacial} & $O(n)$ & $O(d)$ \\
+  \textbf{Optimalidad} & Garantizada & No garantizada \\
+  \textbf{Implementación} & Compleja & Simple \\
+  \textbf{Escalabilidad} & Limitada & Buena \\
+  \hline
+  \textbf{Ventajas} & Solución óptima & Eficiente, práctico \\
+  \textbf{Desventajas} & Factorial, lento & Puede ser subóptimo \\
+  \hline
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 4: Huffman Codes
+% =======================================================
+\section{Problema 4: Huffman Codes}
+\begin{frame}{Tabla de Contenidos}
+    \tableofcontents[
+      currentsection,
+      hideothersubsections
+    ]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Enunciado — Huffman Codes}
+  \begin{block}{Enunciado}
+    El problema de codificación de Huffman consiste en encontrar el código de longitud variable óptimo para un conjunto de símbolos dados sus frecuencias de aparición. El objetivo es minimizar la longitud promedio de codificación.
+  \end{block}
+\end{frame}
+
+\subsection{Fuerza Bruta}
+\begin{frame}[fragile]{Pseudocódigo — Fuerza Bruta}
+  \begin{algorithm}[H]
+  \caption{Códigos de Huffman con Fuerza Bruta}
+  \begin{algorithmic}[1]
+      \REQUIRE Símbolos y frecuencias
+      \ENSURE Costo mínimo y asignación óptima
+      
+      \STATE $best\_cost \leftarrow \infty$
+      \FOR{cada árbol binario completo con $n$ hojas}
+          \STATE $lengths \leftarrow$ longitudes de código del árbol
+          \FOR{cada permutación de asignación de símbolos}
+              \STATE $cost \leftarrow$ calcular costo total
+              \IF{$cost < best\_cost$}
+                  \STATE Actualizar mejor solución
+              \ENDIF
+          \ENDFOR
+      \ENDFOR
+      \RETURN $best\_cost, best\_assignment$
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Algoritmo Greedy}
+\begin{frame}[fragile]{Pseudocódigo — Greedy}
+  \begin{algorithm}[H]
+  \caption{Códigos de Huffman con Greedy}
+  \begin{algorithmic}[1]
+      \REQUIRE Símbolos y frecuencias
+      \ENSURE Códigos Huffman para cada símbolo
+      
+      \STATE Crear min-heap con nodos hoja para cada símbolo
+      \WHILE{heap tiene más de un elemento}
+          \STATE $l \leftarrow$ extraer mínimo
+          \STATE $r \leftarrow$ extraer mínimo
+          \STATE Crear nodo interno con frecuencia $l.freq + r.freq$
+          \STATE Insertar nodo interno en heap
+      \ENDWHILE
+      \STATE Generar códigos mediante recorrido preorden
+      \RETURN códigos generados
+  \end{algorithmic}
+  \end{algorithm}
+\end{frame}
+
+\subsection{Código}
+\begin{frame}{Código — Fuerza Bruta}
+  %\lstinputlisting[language=Python, firstline=1, lastline=42,style=pyDark]{pc3/huffmancodesBruteForce.py}
+\end{frame}
+
+\begin{frame}{Código — Greedy}
+  %\lstinputlisting[language=Python, firstline=1, lastline=40,style=pyDark]{pc3/huffmancodesGREEDY.py}
+\end{frame}
+
+\subsection{Comparación}
+\begin{frame}{Comparación — Huffman Codes}
+  \begin{table}[h]
+  \centering
+  \begin{tabular}{|l|c|c|}
+  \hline
+  \textbf{Aspecto} & \textbf{Fuerza Bruta} & \textbf{Greedy} \\
+  \hline
+  \textbf{Complejidad Temporal} & $O(C_{n-1} \cdot n! \cdot n)$ & $O(n \log n)$ \\
+  \textbf{Complejidad Espacial} & $O(n)$ & $O(n)$ \\
+  \textbf{Optimalidad} & Garantizada & Garantizada \\
+  \textbf{Implementación} & Muy compleja & Simple \\
+  \textbf{Escalabilidad} & Muy limitada & Excelente \\
+  \hline
+  \textbf{Ventajas} & Solución óptima & Eficiente y óptimo \\
+  \textbf{Desventajas} & Exponencial, impracticable & Ninguna significativa \\
+  \hline
+  \end{tabular}
+  \end{table}
+\end{frame}
+
+% ====== Conclusiones ======
+\section*{Conclusiones Generales}
+\begin{frame}{Conclusiones Generales}
+  \begin{block}{Análisis Comparativo}
+    \begin{itemize}
+      \item \textbf{Fuerza Bruta}: Garantiza solución óptima pero con complejidad exponencial
+      \item \textbf{Greedy}: Eficiente y práctico, pero no siempre óptimo
+      \item \textbf{Trade-offs}: Optimalidad vs. eficiencia computacional
+      \item \textbf{Aplicabilidad}: Depende del tamaño del problema y requisitos
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{Recomendaciones}
+  \begin{block}{Cuándo usar cada enfoque}
+    \begin{itemize}
+      \item \textbf{Fuerza Bruta}: Problemas pequeños, verificación de algoritmos, casos donde la optimalidad es crítica
+      \item \textbf{Greedy}: Problemas grandes, aplicaciones en tiempo real, cuando la eficiencia es prioritaria
+      \item \textbf{Híbrido}: Combinar ambos enfoques según el contexto del problema
+    \end{itemize}
+  \end{block}
+  
+  \begin{alertblock}{Consideraciones}
+    Siempre evaluar el tamaño del problema, requisitos de optimalidad y restricciones de tiempo antes de elegir el enfoque.
+  \end{alertblock}
+\end{frame}
+
+\end{document}
