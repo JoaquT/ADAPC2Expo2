@@ -1,0 +1,823 @@
+\documentclass[aspectratio=169]{beamer}
+\usetheme{Madrid}
+
+% ====== Language & encoding ======
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{catchfilebetweentags}
+
+% ====== Useful packages for later editing ======
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath, amssymb}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{tikz}
+\usepackage{forest}
+
+% Código
+\usepackage{listingsutf8}
+\lstset{
+    inputencoding=utf8,
+    extendedchars=true,
+    columns=fullflexible,
+    breaklines=true,
+    showstringspaces=false,
+}
+
+% Paleta de colores
+\definecolor{codebg}{RGB}{0,0,0}
+\definecolor{c-linenum}{RGB}{120,120,120}
+\definecolor{c-key}{RGB}{97,175,239}
+\definecolor{c-str}{RGB}{152,195,121}
+\definecolor{c-com}{RGB}{92,99,112}
+\definecolor{c-id}{RGB}{224,108,117}
+\definecolor{c-builtin}{RGB}{198,120,221}
+\definecolor{c-num}{RGB}{209,154,102}
+
+% Mapeo de tildes/ñ/¿/¡ para listings
+\lstset{literate=
+ {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'\i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+ {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+ {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {ü}{{\"u}}1 {Ü}{{\"U}}1
+ {¿}{{\textquestiondown}}1 {¡}{{\textexclamdown}}1
+}
+
+% Configuración de algoritmos
+\floatname{algorithm}{Algoritmo}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Salida:}}
+\renewcommand{\thealgorithm}{}
+
+% Comandos personalizados para algoritmos
+\makeatletter
+\newcommand{\REQUIRE}{\item[\algorithmicrequire]}
+\newcommand{\ENSURE}{\item[\algorithmicensure]}
+\makeatother
+
+% ====== Title data ======
+\title[Análisis y Diseño de Algoritmos]{Exposición: Problemas de Análisis y Diseño de Algoritmos}
+\subtitle{Brute Force vs Greedy}
+\author[Delgado, G. \and Torres, J. \and Quintanilla, D.]{Delgado Romero, Gustavo \\ Torres Reategui, Joaquin \\ Quintanilla Quispe, Dylan}
+\institute[UNI]{Universidad Nacional de Ingeniería \\ CC371 - Análisis y Diseño de Algoritmos}
+\date{\today}
+
+\begin{document}
+
+% ====== Title ======
+\begin{frame}
+\titlepage
+\end{frame}
+
+% ====== Agenda ======
+\begin{frame}{Tabla de Contenidos}
+\tableofcontents[hideallsubsections]
+\end{frame}
+
+% ====== Resumen de Problemas ======
+\begin{frame}{Resumen de Problemas}
+\begin{block}{Problemas a Desarrollar}
+\begin{enumerate}
+\item \textbf{Activity Selection Problem} - Selección de actividades
+\item \textbf{Graph Coloring} - Coloreo de grafos
+\item \textbf{Job Scheduling with Deadlines} - Programación de trabajos
+\item \textbf{Huffman Codes} - Códigos de Huffman
+\end{enumerate}
+\end{block}
+
+\begin{block}{Enfoques Comparados}
+\begin{itemize}
+\item \textbf{Fuerza Bruta}: Solución óptima garantizada, complejidad exponencial
+\item \textbf{Greedy}: Solución eficiente, no siempre óptima, complejidad polinomial
+\end{itemize}
+\end{block}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 1: Activity Selection Problem
+% =======================================================
+\section{Problema 1: Activity Selection Problem}
+
+\begin{frame}{Tabla de Contenidos}
+\tableofcontents[currentsection,hideothersubsections]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Activity Selection Problem - Enunciado}
+\begin{block}{Descripción del Problema}
+Seleccionar el máximo número de actividades mutuamente compatibles de un conjunto dado. Cada actividad tiene:
+\begin{itemize}
+\item Tiempo de inicio y finalización
+\item Compatibilidad: No deben solaparse en el tiempo
+\item Objetivo: Maximizar el número de actividades seleccionadas
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Ejemplo}
+Actividades: [(1,2), (3,4), (0,6), (5,7), (8,9), (5,9)]\\
+Solución óptima: 4 actividades
+\end{exampleblock}
+\end{frame}
+
+\subsection{Enfoque de Fuerza Bruta}
+\begin{frame}{Activity Selection - Fuerza Bruta}
+\begin{block}{Estrategia}
+\begin{itemize}
+\item Generar todos los subconjuntos posibles de actividades
+\item Verificar compatibilidad para cada subconjunto
+\item Seleccionar el subconjunto válido de mayor tamaño
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(2^n \cdot n^2)$ - Exponencial
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Brute Force)}
+\begin{frame}[fragile]{Activity Selection - Pseudocódigo Fuerza Bruta}
+\begin{algorithmic}[1]
+\REQUIRE Lista de actividades $(start, end)$
+\ENSURE Subconjunto de máximo tamaño de actividades compatibles
+\State $n \leftarrow$ número de actividades
+\State $best \leftarrow$ lista vacía
+\For{$r = 1$ to $n$}
+    \For{cada $subset$ en $combinations(activities, r)$}
+        \If{$is\_valid(subset)$ $\land$ $|subset| > |best|$}
+            \State $best \leftarrow subset$
+        \EndIf
+    \EndFor
+\EndFor
+\Return $best$
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Brute Force)}
+\begin{frame}{Activity Selection - Ejemplo Fuerza Bruta}
+\begin{exampleblock}{Actividades: [(1,3), (2,5), (4,6)]}
+\begin{itemize}
+\item \textbf{Subconjuntos de tamaño 1}: Todos válidos
+\item \textbf{Subconjuntos de tamaño 2}: 
+\begin{itemize}
+\item \{A,B\}: Inválido (se solapan)
+\item \{A,C\}: Válido
+\item \{B,C\}: Inválido (se solapan)
+\end{itemize}
+\item \textbf{Subconjunto de tamaño 3}: Inválido
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{Solución óptima}
+\{A,C\} con 2 actividades
+\end{block}
+\end{frame}
+
+\subsection{Enfoque Greedy}
+\begin{frame}{Activity Selection - Enfoque Greedy}
+\begin{block}{Estrategia Óptima}
+\begin{itemize}
+\item Ordenar actividades por tiempo de finalización
+\item Seleccionar siempre la siguiente actividad que termina primero y no se solape
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(n \log n)$ - Polinomial (óptimo)
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Greedy)}
+\begin{frame}[fragile]{Activity Selection - Pseudocódigo Greedy}
+\begin{algorithmic}[1]
+\REQUIRE Arreglos $start$ y $finish$ de $n$ actividades
+\ENSURE Número máximo de actividades compatibles
+\State Ordenar actividades por $finish$
+\State $count \leftarrow 1$, $j \leftarrow 0$
+\For{$i = 1$ to $n-1$}
+    \If{$start[i] > finish[j]$}
+        \State $count \leftarrow count + 1$
+        \State $j \leftarrow i$
+    \EndIf
+\EndFor
+\Return $count$
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Greedy)}
+\begin{frame}{Activity Selection - Ejemplo Greedy}
+\begin{exampleblock}{Actividades ordenadas: [(1,2), (3,4), (0,6), (5,7), (8,9), (5,9)]}
+\begin{itemize}
+\item Seleccionar (1,2)
+\item Seleccionar (3,4) - No se solapa
+\item Omitir (0,6) - Se solapa
+\item Seleccionar (5,7) - No se solapa
+\item Seleccionar (8,9) - No se solapa
+\item Omitir (5,9) - Se solapa
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{Resultado}
+4 actividades seleccionadas: [(1,2), (3,4), (5,7), (8,9)]
+\end{block}
+\end{frame}
+
+\subsubsection{Análisis comparativo de complejidad}
+\begin{frame}{Activity Selection - Análisis Comparativo}
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Enfoque} & \textbf{Complejidad} & \textbf{Optimalidad} \\
+\midrule
+Fuerza Bruta & $O(2^n \cdot n^2)$ & \checkmark \\
+Greedy & $O(n \log n)$ & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Conclusión}
+\begin{itemize}
+\item Greedy es óptimo y eficiente para este problema
+\item Fuerza bruta solo práctico para instancias pequeñas ($n < 20$)
+\item El ordenamiento por tiempo de finalización garantiza optimalidad
+\end{itemize}
+\end{block}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 2: Graph Coloring
+% =======================================================
+\section{Problema 2: Graph Coloring}
+
+\begin{frame}{Tabla de Contenidos}
+\tableofcontents[currentsection,hideothersubsections]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Graph Coloring - Enunciado}
+\begin{block}{Descripción del Problema}
+Asignar colores a vértices de un grafo tal que:
+\begin{itemize}
+\item Vértices adyacentes tengan colores diferentes
+\item Minimizar el número de colores usado (número cromático)
+\item Problema NP-completo en general
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Aplicaciones}
+\begin{itemize}
+\item Scheduling de procesos
+\item Asignación de registros
+\item Sudoku
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\subsection{Enfoque de Fuerza Bruta}
+\begin{frame}{Graph Coloring - Fuerza Bruta}
+\begin{block}{Estrategia}
+\begin{itemize}
+\item Probar todas las asignaciones de $k$ colores a $n$ vértices
+\item Verificar validez para cada asignación
+\item Encontrar el mínimo $k$ que permita coloreo válido
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(k^n \cdot n \cdot m)$ - Exponencial
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Brute Force)}
+\begin{frame}[fragile]{Graph Coloring - Pseudocódigo Fuerza Bruta}
+\begin{algorithmic}[1]
+\REQUIRE Grafo $G$, número máximo de colores $k$
+\ENSURE Asignación válida de colores o null
+\For{cada $assignment$ en $product(range(k), repeat=n)$}
+    \If{$is\_valid(G, assignment)$}
+        \Return $assignment$
+    \EndIf
+\EndFor
+\Return \textbf{null}
+\end{algorithmic}
+
+\begin{algorithmic}[1]
+\Function{is\_valid}{$G$, $colors$}
+\For{$u = 0$ to $|G|-1$}
+    \For{cada $v$ en $G[u]$}
+        \If{$colors[u] = colors[v]$}
+            \Return false
+        \EndIf
+    \EndFor
+\EndFor
+\Return true
+\EndFunction
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Brute Force)}
+\begin{frame}{Graph Coloring - Ejemplo Fuerza Bruta}
+\begin{exampleblock}{Grafo con 3 vértices: Triángulo}
+\begin{itemize}
+\item \textbf{k=2}: Probar $2^3=8$ asignaciones, ninguna válida
+\item \textbf{k=3}: Probar $3^3=27$ asignaciones
+\item Encontrar solución: [0,1,2] - 3 colores
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{Limitaciones}
+\begin{itemize}
+\item 10 vértices con 3 colores: $3^{10} = 59,049$ pruebas
+\item 20 vértices: $3^{20} > 3.4$ billones de pruebas
+\end{itemize}
+\end{block}
+\end{frame}
+
+\subsection{Enfoque Greedy}
+\begin{frame}{Graph Coloring - Enfoque Greedy}
+\begin{block}{Estrategia}
+\begin{itemize}
+\item Procesar vértices en orden fijo
+\item Asignar el menor color disponible no usado por vecinos
+\item No garantiza número cromático mínimo
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(V^2 + E)$ - Polinomial
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Greedy)}
+\begin{frame}[fragile]{Graph Coloring - Pseudocódigo Greedy}
+\begin{algorithmic}[1]
+\REQUIRE Grafo $G$ con $V$ vértices
+\ENSURE Asignación válida de colores
+\State $result \leftarrow$ arreglo de tamaño $V$ inicializado en -1
+\State $result[0] \leftarrow 0$
+\For{$u = 1$ to $V-1$}
+    \State Marcar colores de vecinos como no disponibles
+    \State Encontrar primer color disponible $cr$
+    \State $result[u] \leftarrow cr$
+    \State Resetear marcas de disponibilidad
+\EndFor
+\Return $result$
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Greedy)}
+\begin{frame}{Graph Coloring - Ejemplo Greedy}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{exampleblock}{Grafo de 5 vértices}
+\begin{itemize}
+\item V0: Color 0
+\item V1: Color 1 (vecino de V0)
+\item V2: Color 2 (vecino de V0,1)
+\item V3: Color 0 (vecino de V1,2)
+\item V4: Color 1 (vecino de V3)
+\end{itemize}
+\end{exampleblock}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{tikzpicture}[node distance=1.5cm]
+\node[circle,draw,fill=red!30] (0) at (0,0) {0};
+\node[circle,draw,fill=blue!30] (1) at (2,0) {1};
+\node[circle,draw,fill=green!30] (2) at (1,1.5) {2};
+\node[circle,draw,fill=red!30] (3) at (3,1.5) {3};
+\node[circle,draw,fill=blue!30] (4) at (4,0) {4};
+\draw (0)--(1)--(2)--(0)--(2)--(3)--(1)--(3)--(4);
+\end{tikzpicture}
+\end{column}
+\end{columns}
+
+\begin{block}{Resultado}
+3 colores usados (óptimo para este grafo)
+\end{block}
+\end{frame}
+
+\subsubsection{Análisis comparativo de complejidad}
+\begin{frame}{Graph Coloring - Análisis Comparativo}
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Enfoque} & \textbf{Complejidad} & \textbf{Optimalidad} \\
+\midrule
+Fuerza Bruta & $O(k^n \cdot n \cdot m)$ & \checkmark \\
+Greedy & $O(V^2 + E)$ & $\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Conclusión}
+\begin{itemize}
+\item Fuerza bruta garantiza optimalidad pero es impráctica
+\item Greedy es eficiente pero puede usar más colores de los necesarios
+\item En la práctica: Greedy para grafos grandes, heurísticas avanzadas para mejor aproximación
+\end{itemize}
+\end{block}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 3: Job Scheduling with Deadlines
+% =======================================================
+\section{Problema 3: Job Scheduling with Deadlines}
+
+\begin{frame}{Tabla de Contenidos}
+\tableofcontents[currentsection,hideothersubsections]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Job Scheduling - Enunciado}
+\begin{block}{Descripción del Problema}
+Programar trabajos con:
+\begin{itemize}
+\item Deadline: Tiempo límite para completar
+\item Profit: Ganancia por completar a tiempo
+\item Cada trabajo toma 1 unidad de tiempo
+\item Objetivo: Maximizar ganancia total
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Aplicaciones}
+\begin{itemize}
+\item Scheduling de procesos en CPU
+\item Planificación de producción
+\item Asignación de recursos limitados
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\subsection{Enfoque de Fuerza Bruta}
+\begin{frame}{Job Scheduling - Fuerza Bruta}
+\begin{block}{Estrategia}
+\begin{itemize}
+\item Generar todas las permutaciones de trabajos
+\item Para cada permutación, programar trabajos en orden
+\item Solo incluir trabajos que cumplan deadline
+\item Seleccionar permutación con máxima ganancia
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(n! \cdot n)$ - Factorial
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Brute Force)}
+\begin{frame}[fragile]{Job Scheduling - Pseudocódigo Fuerza Bruta}
+\begin{algorithmic}[1]
+\REQUIRE Lista de trabajos $(id, deadline, profit)$
+\ENSURE Programación con máxima ganancia
+\State $max\_profit \leftarrow 0$, $best\_schedule \leftarrow$ []
+\For{cada $perm$ en $permutations(jobs)$}
+    \State $time \leftarrow 0$, $profit \leftarrow 0$, $schedule \leftarrow$ []
+    \For{cada $job$ en $perm$}
+        \If{$time < job.deadline$}
+            \State $schedule.append(job)$, $profit \leftarrow profit + job.profit$
+            \State $time \leftarrow time + 1$
+        \EndIf
+    \EndFor
+    \If{$profit > max\_profit$}
+        \State $max\_profit \leftarrow profit$, $best\_schedule \leftarrow schedule$
+    \EndIf
+\EndFor
+\Return $best\_schedule, max\_profit$
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Brute Force)}
+\begin{frame}{Job Scheduling - Ejemplo Fuerza Bruta}
+\begin{exampleblock}{Trabajos: [(a,2,100), (b,1,19), (c,2,27), (d,1,25), (e,3,15)]}
+\begin{itemize}
+\item \textbf{Permutación 1}: [a,b,c,d,e] → Ganancia: 142
+\item \textbf{Permutación 2}: [b,a,c,d,e] → Ganancia: 134
+\item \textbf{Permutación 3}: [d,a,c,b,e] → Ganancia: 140
+\item \textbf{Mejor}: [a,c,e] con ganancia 142
+\end{itemize}
+\end{exampleblock}
+
+\begin{alertblock}{Limitaciones}
+5 trabajos = 120 permutaciones, 10 trabajos = 3.6 millones
+\end{alertblock}
+\end{frame}
+
+\subsection{Enfoque Greedy}
+\begin{frame}{Job Scheduling - Enfoque Greedy}
+\begin{block}{Estrategia}
+\begin{itemize}
+\item Ordenar trabajos por profit descendente
+\item Para cada trabajo, asignar al slot más tardío disponible dentro de su deadline
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(n \log n + n \cdot d)$ - Polinomial
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Greedy)}
+\begin{frame}[fragile]{Job Scheduling - Pseudocódigo Greedy}
+\begin{algorithmic}[1]
+\REQUIRE Lista de trabajos $(id, deadline, profit)$
+\ENSURE Programación y ganancia total
+\State Ordenar trabajos por profit descendente
+\State $max\_d \leftarrow \max(deadlines)$
+\State $slots \leftarrow$ arreglo de tamaño $max\_d+1$ inicializado en -1
+\State $total\_profit \leftarrow 0$
+\For{cada $job$ en trabajos ordenados}
+    \For{$t = job.deadline$ to $1$}
+        \If{$slots[t] = -1$}
+            \State $slots[t] \leftarrow job.id$, $total\_profit \leftarrow total\_profit + job.profit$
+            \State \textbf{break}
+        \EndIf
+    \EndFor
+\EndFor
+\Return trabajos en $slots$, $total\_profit$
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Greedy)}
+\begin{frame}{Job Scheduling - Ejemplo Greedy}
+\begin{exampleblock}{Trabajos ordenados: [a(100), c(27), d(25), b(19), e(15)]}
+\begin{itemize}
+\item \textbf{a}(deadline=2): Slot 2 → Profit=100
+\item \textbf{c}(deadline=2): Slot 1 → Profit=127
+\item \textbf{d}(deadline=1): No hay slot disponible
+\item \textbf{b}(deadline=1): No hay slot disponible
+\item \textbf{e}(deadline=3): Slot 3 → Profit=142
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{Resultado}
+Programación: [c, a, e] con ganancia 142 (óptima)
+\end{block}
+\end{frame}
+
+\subsubsection{Análisis comparativo de complejidad}
+\begin{frame}{Job Scheduling - Análisis Comparativo}
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Enfoque} & \textbf{Complejidad} & \textbf{Optimalidad} \\
+\midrule
+Fuerza Bruta & $O(n! \cdot n)$ & \checkmark \\
+Greedy & $O(n \log n + n \cdot d)$ & $\times$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Conclusión}
+\begin{itemize}
+\item Greedy no siempre es óptimo pero es muy eficiente
+\item En la práctica funciona bien para la mayoría de casos
+\item Fuerza bruta solo para instancias muy pequeñas ($n < 10$)
+\end{itemize}
+\end{block}
+\end{frame}
+
+% =======================================================
+% PROBLEMA 4: Huffman Codes
+% =======================================================
+\section{Problema 4: Huffman Codes}
+
+\begin{frame}{Tabla de Contenidos}
+\tableofcontents[currentsection,hideothersubsections]
+\end{frame}
+
+\subsection{Enunciado}
+\begin{frame}{Huffman Codes - Enunciado}
+\begin{block}{Descripción del Problema}
+Encontrar código de prefijo óptimo para compresión de datos:
+\begin{itemize}
+\item Símbolos con frecuencias dadas
+\item Código de longitud variable
+\item Objetivo: Minimizar longitud promedio
+\item $\text{Costo} = \sum f_i \cdot l_i$
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Aplicaciones}
+\begin{itemize}
+\item Compresión de archivos (ZIP, JPEG, MP3)
+\item Transmisión eficiente de datos
+\end{itemize}
+\end{exampleblock}
+\end{frame}
+
+\subsection{Enfoque de Fuerza Bruta}
+\begin{frame}{Huffman Codes - Fuerza Bruta}
+\begin{block}{Estrategia}
+\begin{itemize}
+\item Generar todos los árboles binarios completos con n hojas
+\item Para cada árbol, calcular longitudes de código
+\item Probar todas las asignaciones de símbolos a hojas
+\item Seleccionar asignación con mínimo costo
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(C_{n-1} \cdot n! \cdot n)$ - Super-exponencial
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Brute Force)}
+\begin{frame}[fragile]{Huffman Codes - Pseudocódigo Fuerza Bruta}
+\begin{algorithmic}[1]
+\REQUIRE Símbolos y frecuencias
+\ENSURE Asignación óptima de códigos
+\State $n \leftarrow$ número de símbolos
+\State $best\_cost \leftarrow \infty$, $best\_assignment \leftarrow$ null
+\For{cada $tree$ en $generate\_trees(n)$}
+    \State $lengths \leftarrow code\_lengths(tree)$
+    \For{cada $perm$ en $permutations(range(n))$}
+        \State $cost \leftarrow \sum freqs[perm[i]] \cdot lengths[i]$
+        \If{$cost < best\_cost$}
+            \State $best\_cost \leftarrow cost$, $best\_assignment \leftarrow$ asignación
+        \EndIf
+    \EndFor
+\EndFor
+\Return $best\_cost, best\_assignment$
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Brute Force)}
+\begin{frame}{Huffman Codes - Ejemplo Fuerza Bruta}
+\begin{exampleblock}{4 símbolos: [A:5, B:2, C:1, D:1]}
+\begin{itemize}
+\item Número de árboles: $C_3 = 5$
+\item Permutaciones por árbol: $4! = 24$
+\item Total: $5 \times 24 = 120$ asignaciones
+\item \textbf{Mejor}: A→1, B→2, C→2, D→3 (Costo=14)
+\end{itemize}
+\end{exampleblock}
+
+\begin{alertblock}{Limitaciones}
+6 símbolos: $C_5 = 42$ árboles $\times$ $6! = 720$ $\times$ 6 = 181,440 operaciones
+\end{alertblock}
+\end{frame}
+
+\subsection{Enfoque Greedy}
+\begin{frame}{Huffman Codes - Enfoque Greedy}
+\begin{block}{Estrategia Óptima}
+\begin{itemize}
+\item Usar min-heap por frecuencias
+\item Combinar siempre los dos nodos de menor frecuencia
+\item Construir árbol de abajo hacia arriba
+\end{itemize}
+\end{block}
+
+\begin{alertblock}{Complejidad}
+$O(n \log n)$ - Polinomial (óptimo)
+\end{alertblock}
+\end{frame}
+
+\subsubsection{Pseudocódigo (Greedy)}
+\begin{frame}[fragile]{Huffman Codes - Pseudocódigo Greedy}
+\begin{algorithmic}[1]
+\REQUIRE Símbolos y frecuencias
+\ENSURE Códigos Huffman óptimos
+\State $pq \leftarrow$ min-heap vacío
+\For{cada símbolo}
+    \State $pq.push(Node(freq))$
+\EndFor
+\While{$|pq| > 1$}
+    \State $l \leftarrow pq.pop()$, $r \leftarrow pq.pop()$
+    \State $new \leftarrow Node(l.freq + r.freq)$
+    \State $new.left \leftarrow l$, $new.right \leftarrow r$
+    \State $pq.push(new)$
+\EndWhile
+\State $root \leftarrow pq.pop()$
+\State Generar códigos con recorrido preorden
+\Return códigos
+\end{algorithmic}
+\end{frame}
+
+\subsubsection{Ejemplo explicativo (Greedy)}
+\begin{frame}{Huffman Codes - Ejemplo Greedy}
+\begin{exampleblock}{Símbolos: [a:5, b:9, c:12, d:13, e:16, f:45]}
+\begin{itemize}
+\item Combinar a(5) + b(9) = 14
+\item Combinar c(12) + d(13) = 25
+\item Combinar 14 + e(16) = 30
+\item Combinar 25 + 30 = 55
+\item Combinar f(45) + 55 = 100
+\end{itemize}
+\end{exampleblock}
+
+\begin{block}{Resultado}
+Códigos óptimos: f→0, c→100, d→101, a→1100, b→1101, e→111
+\end{block}
+\end{frame}
+
+\subsubsection{Análisis comparativo de complejidad}
+\begin{frame}{Huffman Codes - Análisis Comparativo}
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\toprule
+\textbf{Enfoque} & \textbf{Complejidad} & \textbf{Optimalidad} \\
+\midrule
+Fuerza Bruta & $O(C_{n-1} \cdot n! \cdot n)$ & \checkmark \\
+Greedy & $O(n \log n)$ & \checkmark \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{block}{Conclusión}
+\begin{itemize}
+\item Huffman greedy es óptimo y eficiente
+\item Raro caso donde greedy garantiza optimalidad
+\item Fuerza bruta completamente impráctica
+\item Algoritmo ampliamente usado en compresión
+\end{itemize}
+\end{block}
+\end{frame}
+
+% =======================================================
+% CONCLUSIONES Y RECOMENDACIONES
+% =======================================================
+\section{Conclusiones y Recomendaciones}
+
+\begin{frame}{Tabla de Contenidos}
+\tableofcontents[currentsection,hideothersubsections]
+\end{frame}
+
+\begin{frame}{Conclusiones Generales}
+\begin{block}{Comparativa de Enfoques}
+\begin{table}
+\centering
+\small
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Problema} & \textbf{BF Optimal} & \textbf{Greedy Optimal} & \textbf{BF Complejidad} & \textbf{Greedy Complejidad} \\
+\midrule
+Activity Selection & \checkmark & \checkmark & $O(2^n n^2)$ & $O(n \log n)$ \\
+Graph Coloring & \checkmark & $\times$ & $O(k^n nm)$ & $O(V^2 + E)$ \\
+Job Scheduling & \checkmark & $\times$ & $O(n! n)$ & $O(n \log n + nd)$ \\
+Huffman Codes & \checkmark & \checkmark & $O(C_{n-1} n! n)$ & $O(n \log n)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+\end{block}
+
+\begin{block}{Insights Clave}
+\begin{itemize}
+\item Greedy es óptimo cuando el problema exhibe \textbf{subestructura óptima}
+\item La \textbf{elección greedy} debe preservar la posibilidad de solución óptima
+\item Fuerza bruta es invaluable para verificar correctitud de algoritmos
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Recomendaciones Prácticas}
+\begin{block}{Cuándo usar cada enfoque}
+\begin{itemize}
+\item \textbf{Fuerza Bruta}: 
+\begin{itemize}
+\item Problemas pequeños ($n \leq 20$)
+\item Verificación de algoritmos
+\item Casos donde se necesita optimalidad garantizada
+\end{itemize}
+
+\item \textbf{Greedy}:
+\begin{itemize}
+\item Problemas grandes donde optimalidad no es crítica
+\item Cuando el problema exhibe subestructura óptima
+\item Aplicaciones en tiempo real que requieren rapidez
+\end{itemize}
+\end{itemize}
+\end{block}
+
+\begin{exampleblock}{Estrategia Híbrida}
+En la práctica: Empezar con greedy, usar fuerza bruta para casos pequeños o como verificación
+\end{exampleblock}
+\end{frame}
+
+\begin{frame}{Preguntas y Discusión}
+\begin{center}
+\Huge ¿Preguntas?
+\end{center}
+
+\begin{block}{Contacto}
+\begin{itemize}
+\item Delgado Romero
+\item Torres Reategui 
+\item Quintanilla Quispe
+\end{itemize}
+\end{block}
+
+\begin{center}
+¡Gracias por su atención!
+\end{center}
+\end{frame}
+
+\end{document}

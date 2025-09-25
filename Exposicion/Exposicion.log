@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.26)  24 SEP 2025 15:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.5.26)  25 SEP 2025 09:37
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"d:/02.Estudios/1.UNI/CC371 ADA/Trabajos/TAREA 6/ADAPC2Expo2/Exposicion/Exposicion_BruteForce_vs_Greedy.tex"
-(d:/02.Estudios/1.UNI/CC371 ADA/Trabajos/TAREA 6/ADAPC2Expo2/Exposicion/Exposicion_BruteForce_vs_Greedy.tex
+**"d:/02.Estudios/1.UNI/CC371 ADA/Trabajos/TAREA 6/ADAPC2Expo2/Exposicion/Exposicion.tex"
+(d:/02.Estudios/1.UNI/CC371 ADA/Trabajos/TAREA 6/ADAPC2Expo2/Exposicion/Exposicion.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
 (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/beamer\beamer.cls
@@ -873,30 +873,43 @@ Package: inlinedef 2008/07/10 v1.0 Inlined expansions within definitions
 ) (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/listingsutf8\listingsutf8.sty
 Package: listingsutf8 2019-12-10 v1.5 Allow UTF-8 in listings input (HO)
 )
-LaTeX Font Info:    Trying to load font information for T1+lmss on input line 123.
- (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
-File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) (Exposicion_BruteForce_vs_Greedy.aux)
-\openout1 = `Exposicion_BruteForce_vs_Greedy.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
-LaTeX Font Info:    ... okay on input line 123.
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 67.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 67.
+
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 71.
+(C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) (Exposicion.aux
+LaTeX Info: Redefining \. on input line 11.
+LaTeX Info: Redefining \% on input line 11.
+Package babel Info: 'spanish' activates 'spanish' shorthands.
+(babel)             Reported  on input line 11.
+)
+\openout1 = `Exposicion.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 71.
+LaTeX Font Info:    ... okay on input line 71.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -951,56 +964,57 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 123.
+Package hyperref Info: Link coloring OFF on input line 71.
+ (Exposicion.out) (Exposicion.out)
 \@outlinefile=\write6
-\openout6 = `Exposicion_BruteForce_vs_Greedy.out'.
+\openout6 = `Exposicion.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 123.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 71.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 123.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/b/n on input line 71.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 123.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 71.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 123.
+(Font)                  OT1/cmss/b/n --> OT1/lmss/b/n on input line 71.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 123.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 123.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 71.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 123.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 123.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 123.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/b/n on input line 71.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 123.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 123.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 123.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 71.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 123.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 123.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 123.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 71.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 123.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 123.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 71.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 123.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 71.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 123.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 123.
+(Font)                  OT1/lmss/b/n --> T1/lmr/b/n on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 123.
+(Font)                  T1/lmss/b/n --> T1/lmss/b/n on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 123.
+(Font)                  T1/lmss/m/n --> T1/lmss/b/n on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 123.
+(Font)                  T1/lmss/m/it --> T1/lmss/b/it on input line 71.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 123.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/b/n on input line 71.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-basic-dictionary-English.dict
 Dictionary: translator-basic-dictionary, Language: English 
 ) (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-bibliography-dictionary-English.dict
@@ -1014,18 +1028,17 @@ Dictionary: translator-numbers-dictionary, Language: English
 ) (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/translator\translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \. on input line 123.
-LaTeX Info: Redefining \% on input line 123.
-Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported  on input line 123.
+LaTeX Info: Redefining \. on input line 71.
+LaTeX Info: Redefining \% on input line 71.
 \c@lstlisting=\count423
- (Exposicion_BruteForce_vs_Greedy.nav)
+ (Exposicion.nav)
 
 [1
 
-{C:/Users/gusta/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}]
-No file Exposicion_BruteForce_vs_Greedy.toc.
-
+{C:/Users/gusta/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 
 [2
 
@@ -1033,9 +1046,10 @@ No file Exposicion_BruteForce_vs_Greedy.toc.
 
 [3
 
-]
-No file Exposicion_BruteForce_vs_Greedy.toc.
-
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 
 [4
 
@@ -1044,60 +1058,54 @@ No file Exposicion_BruteForce_vs_Greedy.toc.
 [5
 
 ]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb
-LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 8.
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 141.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 141.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 8.
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 141.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 8.
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 141.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 8.
+(Font)              <10.95> on input line 141.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 8.
+(Font)              <8> on input line 141.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 8.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 8.
+(Font)              <6> on input line 141.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 141.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 141.
  (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 8.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 141.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 8.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 141.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 8.
-)
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 141.
+
 
 [6
 
-{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
+{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+\openout4 = `Exposicion.vrb'.
 
- (Exposicion_BruteForce_vs_Greedy.vrb)
+ (Exposicion.vrb)
 
 [7
 
-]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb)
+{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}]
 
 [8
 
@@ -1106,6 +1114,9 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
 [9
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
 
 [10
 
@@ -1114,34 +1125,37 @@ LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
 [11
 
 ]
-No file Exposicion_BruteForce_vs_Greedy.toc.
-
 
 [12
 
-]
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 
 [13
 
 ]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb)
 
 [14
 
 ]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb)
-Overfull \vbox (27.52867pt too high) detected at line 327
- []
-
-
 
 [15
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 14.
+ (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+
+LaTeX Font Warning: Font shape `T1/lmss/m/sc' in size <10.95> not available
+(Font)              Font shape `T1/lmr/m/sc' tried instead on input line 14.
+
+)
 
 [16
 
@@ -1154,8 +1168,9 @@ Overfull \vbox (27.52867pt too high) detected at line 327
 [18
 
 ]
-No file Exposicion_BruteForce_vs_Greedy.toc.
+\openout4 = `Exposicion.vrb'.
 
+ (Exposicion.vrb)
 
 [19
 
@@ -1164,36 +1179,13 @@ No file Exposicion_BruteForce_vs_Greedy.toc.
 [20
 
 ]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb)
-Overfull \vbox (43.25784pt too high) detected at line 402
- []
-
-
 
 [21
 
-]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb
-Exposicion_BruteForce_vs_Greedy.vrb:13: Undefined control sequence.
-<argument> $t = trabajo.deadline$ \DOWNTO 
-                                          $1$
-l.13 ...  \FOR{$t = trabajo.deadline$ \DOWNTO $1$}
-                                                  
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
 )
-Overfull \vbox (29.6578pt too high) detected at line 428
- []
-
-
 
 [22
 
@@ -1206,34 +1198,32 @@ Overfull \vbox (29.6578pt too high) detected at line 428
 [24
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
 
 [25
 
 ]
-No file Exposicion_BruteForce_vs_Greedy.toc.
-
+LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 510.
+ (C:\Users\gusta\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmss.fd
+File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 
 [26
 
-]
+{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
 
 [27
 
 ]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
+\openout4 = `Exposicion.vrb'.
 
- (Exposicion_BruteForce_vs_Greedy.vrb)
-Overfull \vbox (2.45782pt too high) detected at line 499
- []
-
-
+ (Exposicion.vrb)
 
 [28
 
 ]
-\openout4 = `Exposicion_BruteForce_vs_Greedy.vrb'.
-
- (Exposicion_BruteForce_vs_Greedy.vrb)
 
 [29
 
@@ -1241,7 +1231,10 @@ Overfull \vbox (2.45782pt too high) detected at line 499
 
 [30
 
-]
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 
 [31
 
@@ -1249,25 +1242,83 @@ Overfull \vbox (2.45782pt too high) detected at line 499
 
 [32
 
-]
+{C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}]
 
 [33
 
 ]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
 
 [34
 
 ]
+
+[35
+
+]
+
+[36
+
+]
+\openout4 = `Exposicion.vrb'.
+
+ (Exposicion.vrb)
+
+[37
+
+]
+
+[38
+
+]
+
+[39
+
+] (Exposicion.toc
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+
+[40
+
+]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 779.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 779.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 779.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 779.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <7> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 779.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 779.
+
+
+[41
+
+]
+
+[42
+
+]
+
+[43
+
+]
 \tf@nav=\write7
-\openout7 = `Exposicion_BruteForce_vs_Greedy.nav'.
+\openout7 = `Exposicion.nav'.
 
 \tf@toc=\write8
-\openout8 = `Exposicion_BruteForce_vs_Greedy.toc'.
+\openout8 = `Exposicion.toc'.
 
 \tf@snm=\write9
-\openout9 = `Exposicion_BruteForce_vs_Greedy.snm'.
+\openout9 = `Exposicion.snm'.
 
- (Exposicion_BruteForce_vs_Greedy.aux
+ (Exposicion.aux
 LaTeX Info: Redefining \. on input line 11.
 LaTeX Info: Redefining \% on input line 11.
 )
@@ -1275,28 +1326,21 @@ LaTeX Info: Redefining \% on input line 11.
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-04-29>
  ***********
-
-
-Package rerunfilecheck Warning: File `Exposicion_BruteForce_vs_Greedy.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Exposicion_BruteForce_vs_Greedy.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  B741AE75305B41F2C3AA79AB6DD07343;3242.
+Package rerunfilecheck Info: File `Exposicion.out' has not changed.
+(rerunfilecheck)             Checksum: E5AB093D287906A86EE96018785663AA;2735.
  ) 
 Here is how much of TeX's memory you used:
- 39067 strings out of 469923
- 864467 string characters out of 5469170
- 1235943 words of memory out of 5000000
- 65103 multiletter control sequences out of 15000+600000
- 673178 words of font info for 71 fonts, out of 8000000 for 9000
+ 39570 strings out of 469923
+ 878524 string characters out of 5469170
+ 1253315 words of memory out of 5000000
+ 65545 multiletter control sequences out of 15000+600000
+ 707237 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,15n,123p,1680b,875s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on Exposicion_BruteForce_vs_Greedy.pdf (34 pages, 413218 bytes).
+ 128i,15n,123p,1659b,947s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss17.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss9.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsso8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/gusta/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb>
+Output written on Exposicion.pdf (43 pages, 683186 bytes).
 PDF statistics:
- 1171 PDF objects out of 1200 (max. 8388607)
- 94 named destinations out of 1000 (max. 500000)
- 409 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2023 PDF objects out of 2073 (max. 8388607)
+ 124 named destinations out of 1000 (max. 500000)
+ 1991 words of extra memory for PDF output out of 10000 (max. 10000000)
 

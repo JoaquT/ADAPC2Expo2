@@ -27,7 +27,7 @@ El algoritmo greedy resuelve este problema de manera óptima ordenando las activ
 \begin{algorithm}
 \caption{Selección de Actividades con Algoritmo Greedy}
 \begin{algorithmic}[1]
-%<*codigo1a>
+%<*codigo>
 \REQUIRE Arreglos $start$ y $finish$ de $n$ elementos con tiempos de inicio y finalización
 \ENSURE El número máximo de actividades mutuamente compatibles
 
@@ -43,7 +43,7 @@ El algoritmo greedy resuelve este problema de manera óptima ordenando las activ
     \ENDIF
 \ENDFOR
 \RETURN $count$
-%</codigo1a>
+%</codigo>
 \end{algorithmic}
 \end{algorithm}
 
@@ -93,8 +93,9 @@ Esto se debe a que seleccionar $a_1$ no interfiere con las opciones futuras, sin
 
 \section{Resolución Paso a Paso}
 
-\subsection{Ejemplo: start = [1, 3, 0, 5, 8, 5], finish = [2, 4, 6, 7, 9, 9]}
-
+\subsection{Ejemplo}
+%<*ejemplo>
+\textbf{Actividades = [(1, 2), (3, 4), (0, 6), (5, 7), (8, 9), (5, 9)]}
 \textbf{Paso 1:} Crear tuplas de actividades
 \begin{itemize}
     \item Actividad 0: (1, 2)
@@ -165,8 +166,9 @@ Iteraciones:
 \end{itemize}
 
 \textbf{Resultado Final:} Se pueden realizar 4 actividades: Actividad 0, Actividad 1, Actividad 3, y Actividad 4.
-
+%</ejemplo>
 \subsection{Visualización Temporal}
+%<*visualizacion>
 \begin{verbatim}
 Tiempo: 0  1  2  3  4  5  6  7  8  9  10
 Act 0:     |--|                           [OK] Seleccionada
@@ -178,7 +180,7 @@ Act 5:           |-------|                [X] No seleccionada (se solapa)
 
 Solución óptima: 4 actividades
 \end{verbatim}
-
+%</visualizacion>
 \section{Demostración de Optimalidad}
 
 \subsection{Teorema}
