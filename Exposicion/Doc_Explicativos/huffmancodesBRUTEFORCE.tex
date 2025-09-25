@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{tikz}
@@ -35,23 +35,23 @@ El algoritmo de fuerza bruta resuelve este problema generando todos los posibles
 \caption{Generación de Árboles Binarios Completos}
 \begin{algorithmic}[1]
 %<*codigo1a>
-\REQUIRE Número de hojas $n$
-\ENSURE Lista de todos los árboles binarios completos con $n$ hojas
+\Require Número de hojas $n$
+\Ensure Lista de todos los árboles binarios completos con $n$ hojas
 
-\IF{$n = 1$}
-    \RETURN $["x"]$ \COMMENT{Árbol con una sola hoja}
-\ENDIF
+\If{$n = 1$}
+    \Return $[x]$ \Comment{Árbol con una sola hoja}
+\EndIf
 
-\STATE $trees \leftarrow$ lista vacía
-\FOR{$left\_size = 1$ \TO $n-1$}
-    \STATE $right\_size \leftarrow n - left\_size$
-    \FOR{cada $left$ en $generate\_trees(left\_size)$}
-        \FOR{cada $right$ en $generate\_trees(right\_size)$}
-            \STATE $trees.append((left, right))$
-        \ENDFOR
-    \ENDFOR
-\ENDFOR
-\RETURN $trees$
+\State $trees \leftarrow$ lista vacía
+\For{$left\_size = 1$ to $n-1$}
+    \State $right\_size \leftarrow n - left\_size$
+    \For{cada $left$ en $generate\_trees(left\_size)$}
+        \For{cada $right$ en $generate\_trees(right\_size)$}
+            \State $trees.append((left, right))$
+        \EndFor
+    \EndFor
+\EndFor
+\Return $trees$
 %</codigo1a>
 \end{algorithmic}
 \end{algorithm}
@@ -60,17 +60,17 @@ El algoritmo de fuerza bruta resuelve este problema generando todos los posibles
 \caption{Cálculo de Longitudes de Código}
 \begin{algorithmic}[1]
 %<*codigo1b>
-\REQUIRE Árbol binario $tree$ y profundidad inicial $depth$
-\ENSURE Lista de longitudes de código para cada hoja
+\Require Árbol binario $tree$ y profundidad inicial $depth$
+\Ensure Lista de longitudes de código para cada hoja
 
-\IF{$tree = "x"$}
-    \RETURN $[depth]$ \COMMENT{Hoja del árbol}
-\ENDIF
+\If{$tree = x$}
+    \Return $[depth]$ \Comment{Hoja del árbol}
+\EndIf
 
-\STATE $left, right \leftarrow tree$
-\STATE $left\_lengths \leftarrow code\_lengths(left, depth+1)$
-\STATE $right\_lengths \leftarrow code\_lengths(right, depth+1)$
-\RETURN $left\_lengths + right\_lengths$
+\State $left, right \leftarrow tree$
+\State $left\_lengths \leftarrow code\_lengths(left, depth+1)$
+\State $right\_lengths \leftarrow code\_lengths(right, depth+1)$
+\Return $left\_lengths + right\_lengths$
 %</codigo1b>
 \end{algorithmic}
 \end{algorithm}
@@ -79,24 +79,24 @@ El algoritmo de fuerza bruta resuelve este problema generando todos los posibles
 \caption{Códigos de Huffman con Fuerza Bruta}
 \begin{algorithmic}[1]
 %<*codigo1c>
-\REQUIRE Lista de símbolos $symbols$ y frecuencias $freqs$
-\ENSURE Costo mínimo y asignación óptima de longitudes de código
+\Require Lista de símbolos $symbols$ y frecuencias $freqs$
+\Ensure Costo mínimo y asignación óptima de longitudes de código
 
-\STATE $n \leftarrow$ longitud de $symbols$
-\STATE $best\_cost \leftarrow \infty$
-\STATE $best\_assignment \leftarrow$ \textbf{null}
+\State $n \leftarrow$ longitud de $symbols$
+\State $best\_cost \leftarrow \infty$
+\State $best\_assignment \leftarrow$ \textbf{null}
 
-\FOR{cada $tree$ en $generate\_trees(n)$}
-    \STATE $lengths \leftarrow code\_lengths(tree)$
-    \FOR{cada $perm$ en $permutations(range(n))$}
-        \STATE $cost \leftarrow \sum_{i=0}^{n-1} freqs[perm[i]] \cdot lengths[i]$
-        \IF{$cost < best\_cost$}
-            \STATE $best\_cost \leftarrow cost$
-            \STATE $best\_assignment \leftarrow \{symbols[perm[i]]: lengths[i] \text{ para } i = 0 \text{ a } n-1\}$
-        \ENDIF
-    \ENDFOR
-\ENDFOR
-\RETURN $best\_cost, best\_assignment$
+\For{cada $tree$ en $generate\_trees(n)$}
+    \State $lengths \leftarrow code\_lengths(tree)$
+    \For{cada $perm$ en $permutations(range(n))$}
+        \State $cost \leftarrow \sum_{i=0}^{n-1} freqs[perm[i]] \cdot lengths[i]$
+        \If{$cost < best\_cost$}
+            \State $best\_cost \leftarrow cost$
+            \State $best\_assignment \leftarrow \{symbols[perm[i]]: lengths[i] \text{ para } i = 0 \text{ a } n-1\}$
+        \EndIf
+    \EndFor
+\EndFor
+\Return $best\_cost, best\_assignment$
 %</codigo1c>
 \end{algorithmic}
 \end{algorithm}
@@ -290,30 +290,30 @@ Evaluando todas las permutaciones del Árbol 2 con longitudes [3, 3, 2, 1]:
 \hline
 \textbf{Permutación} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} \\
 \hline
-[0,1,2,3] & 3 & 3 & 2 & 1 \\
-[0,1,3,2] & 3 & 3 & 1 & 2 \\
-[0,2,1,3] & 3 & 2 & 3 & 1 \\
-[0,2,3,1] & 3 & 2 & 1 & 3 \\
-[0,3,1,2] & 3 & 1 & 3 & 2 \\
-[0,3,2,1] & 3 & 1 & 2 & 3 \\
-[1,0,2,3] & 3 & 3 & 2 & 1 \\
-[1,0,3,2] & 3 & 3 & 1 & 2 \\
-[1,2,0,3] & 2 & 3 & 3 & 1 \\
-[1,2,3,0] & 2 & 3 & 1 & 3 \\
-[1,3,0,2] & 2 & 1 & 3 & 3 \\
-[1,3,2,0] & 2 & 1 & 3 & 3 \\
-[2,0,1,3] & 3 & 3 & 2 & 1 \\
-[2,0,3,1] & 3 & 3 & 1 & 2 \\
-[2,1,0,3] & 2 & 3 & 3 & 1 \\
-[2,1,3,0] & 2 & 3 & 1 & 3 \\
-[2,3,0,1] & 2 & 1 & 3 & 3 \\
-[2,3,1,0] & 2 & 1 & 3 & 3 \\
-[3,0,1,2] & 3 & 3 & 2 & 1 \\
-[3,0,2,1] & 3 & 3 & 1 & 2 \\
-[3,1,0,2] & 2 & 3 & 3 & 1 \\
-[3,1,2,0] & 2 & 3 & 1 & 3 \\
-[3,2,0,1] & 2 & 3 & 3 & 1 \\
-[3,2,1,0] & 2 & 3 & 1 & 3 \\
+\([0,1,2,3]\) & 3 & 3 & 2 & 1 \\
+\([0,1,3,2]\) & 3 & 3 & 1 & 2 \\
+\([0,2,1,3]\) & 3 & 2 & 3 & 1 \\
+\([0,2,3,1]\) & 3 & 2 & 1 & 3 \\
+\([0,3,1,2]\) & 3 & 1 & 3 & 2 \\
+\([0,3,2,1]\) & 3 & 1 & 2 & 3 \\
+\([1,0,2,3]\) & 3 & 3 & 2 & 1 \\
+\([1,0,3,2]\) & 3 & 3 & 1 & 2 \\
+\([1,2,0,3]\) & 2 & 3 & 3 & 1 \\
+\([1,2,3,0]\) & 2 & 3 & 1 & 3 \\
+\([1,3,0,2]\) & 2 & 1 & 3 & 3 \\
+\([1,3,2,0]\) & 2 & 1 & 3 & 3 \\
+\([2,0,1,3]\) & 3 & 3 & 2 & 1 \\
+\([2,0,3,1]\) & 3 & 3 & 1 & 2 \\
+\([2,1,0,3]\) & 2 & 3 & 3 & 1 \\
+\([2,1,3,0]\) & 2 & 3 & 1 & 3 \\
+\([2,3,0,1]\) & 2 & 1 & 3 & 3 \\
+\([2,3,1,0]\) & 2 & 1 & 3 & 3 \\
+\([3,0,1,2]\) & 3 & 3 & 2 & 1 \\
+\([3,0,2,1]\) & 3 & 3 & 1 & 2 \\
+\([3,1,0,2]\) & 2 & 3 & 3 & 1 \\
+\([3,1,2,0]\) & 2 & 3 & 1 & 3 \\
+\([3,2,0,1]\) & 2 & 3 & 3 & 1 \\
+\([3,2,1,0]\) & 2 & 3 & 1 & 3 \\
 \hline
 \end{tabular}
 \end{center}

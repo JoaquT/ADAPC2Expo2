@@ -1,9 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{spanish}
-\usepackage{babel}
+\usepackage[spanish]{babel}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{booktabs}
@@ -36,32 +35,32 @@ El objetivo es encontrar la secuencia de trabajos que maximice la ganancia total
 \caption{Programación de Trabajos con Fuerza Bruta}
 \begin{algorithmic}[1]
 %<*codigo1a>
-\REQUIRE Una lista $jobs$ de $n$ elementos donde cada elemento es una tupla $(id, deadline, profit)$
-\ENSURE La mejor programación y la ganancia máxima
+\Require Una lista $jobs$ de $n$ elementos donde cada elemento es una tupla $(id, deadline, profit)$
+\Ensure La mejor programación y la ganancia máxima
 
-\STATE $max\_profit \leftarrow 0$
-\STATE $best\_schedule \leftarrow$ lista vacía
+\State $max\_profit \leftarrow 0$
+\State $best\_schedule \leftarrow$ lista vacía
 
-\COMMENT{Probar todas las permutaciones posibles}
-\FOR{cada $perm$ en $permutations(jobs)$}
-    \STATE $time \leftarrow 0$ \COMMENT{Tiempo actual}
-    \STATE $profit \leftarrow 0$ \COMMENT{Ganancia acumulada}
-    \STATE $schedule \leftarrow$ lista vacía \COMMENT{Programación actual}
+\Comment{Probar todas las permutaciones posibles}
+\For{cada $perm$ en $permutations(jobs)$}
+    \State $time \leftarrow 0$ \Comment{Tiempo actual}
+    \State $profit \leftarrow 0$ \Comment{Ganancia acumulada}
+    \State $schedule \leftarrow$ lista vacía \Comment{Programación actual}
     
-    \FOR{cada $job$ en $perm$}
-        \IF{$time < job.deadline$}
-            \STATE $schedule.append(job)$
-            \STATE $profit \leftarrow profit + job.profit$
-            \STATE $time \leftarrow time + 1$
-        \ENDIF
-    \ENDFOR
+    \For{cada $job$ en $perm$}
+        \If{$time < job.deadline$}
+            \State $schedule.append(job)$
+            \State $profit \leftarrow profit + job.profit$
+            \State $time \leftarrow time + 1$
+        \EndIf
+    \EndFor
     
-    \IF{$profit > max\_profit$}
-        \STATE $max\_profit \leftarrow profit$
-        \STATE $best\_schedule \leftarrow schedule$
-    \ENDIF
-\ENDFOR
-\RETURN $best\_schedule, max\_profit$
+    \If{$profit > max\_profit$}
+        \State $max\_profit \leftarrow profit$
+        \State $best\_schedule \leftarrow schedule$
+    \EndIf
+\EndFor
+\Return $best\_schedule, max\_profit$
 %</codigo1a>
 \end{algorithmic}
 \end{algorithm}
@@ -114,7 +113,7 @@ Esta complejidad factorial hace que el algoritmo sea impráctico para problemas 
 
 \section{Resolución Paso a Paso}
 
-\subsection{Ejemplo: Trabajos = [("a",2,100), ("b",1,19), ("c",2,27), ("d",1,25), ("e",3,15)]}
+\subsection{Ejemplo: Trabajos = [(``a'',2,100), (``b'',1,19), (``c'',2,27), (``d'',1,25), (``e'',3,15)]}
 
 \textbf{Trabajos de entrada:}
 \begin{center}

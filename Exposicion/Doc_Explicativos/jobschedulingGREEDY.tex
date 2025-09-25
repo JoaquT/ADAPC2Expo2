@@ -2,7 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
 \usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{booktabs}
@@ -37,26 +37,26 @@ El algoritmo greedy resuelve este problema ordenando los trabajos por ganancia d
 \caption{Programación de Trabajos con Algoritmo Greedy}
 \begin{algorithmic}[1]
 %<*codigo1a>
-\REQUIRE Lista de trabajos $jobs$ donde cada trabajo tiene $(id, deadline, profit)$
-\ENSURE Lista de trabajos seleccionados y ganancia total
+\Require Lista de trabajos $jobs$ donde cada trabajo tiene $(id, deadline, profit)$
+\Ensure Lista de trabajos seleccionados y ganancia total
 
-\STATE Ordenar $jobs$ por ganancia en orden descendente
-\STATE $max\_deadline \leftarrow \max\{job.deadline \text{ para todo } job \text{ en } jobs\}$
-\STATE $slots \leftarrow$ arreglo de tamaño $max\_deadline + 1$ inicializado en $-1$
-\STATE $total\_profit \leftarrow 0$
-\STATE $scheduled\_jobs \leftarrow$ lista vacía
+\State Ordenar $jobs$ por ganancia en orden descendente
+\State $max\_deadline \leftarrow \max\{job.deadline \text{ para todo } job \text{ en } jobs\}$
+\State $slots \leftarrow$ arreglo de tamaño $max\_deadline + 1$ inicializado en $-1$
+\State $total\_profit \leftarrow 0$
+\State $scheduled\_jobs \leftarrow$ lista vacía
 
-\FOR{cada $job$ en $jobs$ (ordenados por ganancia descendente)}
-    \FOR{$t = job.deadline$ \DOWNTO $1$}
-        \IF{$slots[t] = -1$}
-            \STATE $slots[t] \leftarrow job.id$
-            \STATE $total\_profit \leftarrow total\_profit + job.profit$
-            \STATE $scheduled\_jobs.append(job.id)$
-            \STATE \textbf{break}
-        \ENDIF
-    \ENDFOR
-\ENDFOR
-\RETURN $scheduled\_jobs, total\_profit$
+\For{cada $job$ en $jobs$ (ordenados por ganancia descendente)}
+    \For{$t \gets job.deadline;\ t \ge 1;\ t \gets t-1$}
+        \If{$slots[t] = -1$}
+            \State $slots[t] \leftarrow job.id$
+            \State $total\_profit \leftarrow total\_profit + job.profit$
+            \State $scheduled\_jobs.append(job.id)$
+            \State \textbf{break}
+        \EndIf
+    \EndFor
+\EndFor
+\Return $scheduled\_jobs, total\_profit$
 %</codigo1a>
 \end{algorithmic}
 \end{algorithm}
